@@ -15,17 +15,18 @@ export default defineNuxtConfig({
         rel: "stylesheet",
         href: "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
       },
-      {
-        rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'
-      }
+      // TODO: add favicon  
+      // {
+      //   rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'
+      // }
     ],
-    title: 'Element Plus + Nuxt 3',
+    title: 'Produce Goose',
     meta: [
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       {
         hid: 'description',
         name: 'description',
-        content: 'ElementPlus + Nuxt3',
+        content: 'Order fresh produce from the comfort of your own home from local, organic farms with a few clicks',
       },
     ],
   },
@@ -38,17 +39,25 @@ export default defineNuxtConfig({
     transpile: ['element-plus/es'],
   },
 
-  typescript: {
-    strict: true,
-    shim: false,
-  },
-
   vite: {
-    plugins: [ElementPlus()],
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@use "~/assets/scss/element-ui/index.scss" as *;`,
+        },
+      },
+    },
+    plugins: [ElementPlus({
+      useSource: true,
+    })],
   },
 
   // build modules
-  modules: ['@vueuse/nuxt', '@unocss/nuxt', '@pinia/nuxt'],
+  modules: [
+    '@vueuse/nuxt',
+    '@unocss/nuxt',
+    '@pinia/nuxt'
+  ],
 
   // auto import components
   components: true,
