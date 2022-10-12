@@ -1,21 +1,25 @@
 <script setup>
+import { ElButton, ElInput, ElIcon } from 'element-plus'
+import { Search } from '@element-plus/icons-vue'
 import { useUserStore } from "@/store/user";
 
-const userStore = useUserStore()
-const input = ref('');
-const searchResults = ref([])
+const router = useRouter()
+const query = ref('');
 
-async function onSearchClick() {
-  const { items } = await $fetch(`https://produce-goose-backend-stg.herokuapp.com/search/?q=${input.value}`);
-  searchResults.value = items;
+function navigateToSearch() {
+  router.push({ path: '/search', query: { q: query.value } })
+  // const { items } = await $fetch(`https://produce-goose-backend-stg.herokuapp.com/search/?q=${input.value}`)
 }
+
+const userStore = useUserStore()
+
 
 </script>
 <template>
   <div class="header">
     <div class="title">
       <a class="reglink" href="/">
-      OFS Farms
+        OFS Farms
       </a>
     </div>
     <div class="hlinks">
@@ -35,11 +39,24 @@ async function onSearchClick() {
         </li>
       
         <li>
-          <input v-model="input" type="text" placeholder="Search">
+          <el-input
+            size="large"
+            v-model="query"
+            placeholder="Search"
+          >
+            <template #append>
+              <el-button
+                @click="navigateToSearch"
+                :style="{
+                  borderBottomLeftRadius: '0',
+                  borderTopLeftRadius: '0',
+                  height: '100%',
+                  backgroundColor: 'var(--pg-color-primary)',
+                }"
+              ><el-icon class="el-icon--center" color="white"><Search/></el-icon></el-button>
+            </template>
+          </el-input>
         </li>   
-        <li>
-          <button @click="onSearchClick" class="search">Search</button>
-        </li>
       </ul>
     </div>
   </div>
@@ -68,7 +85,7 @@ async function onSearchClick() {
   transition: color 0.2s;
 }
 .reglink:hover {
-  color: #ff960d;
+  color: var(--pg-color-primary);
 }
 .title {
   font-size: 40px;
@@ -86,6 +103,10 @@ async function onSearchClick() {
   margin-left: 10px;
   margin-right: 20px;
 }
+.btn {
+  background-color: var(--pg-color-primary);
+  padding: 3px; 
+}
 
 .mcolor {
   color:white;
@@ -99,28 +120,7 @@ ul {
 }
 
 li {
-  display: inline;
-}
-
-.header input[type=text] {
-  padding: 5px;
-  margin-bottom: 10px;
-  font-size: 17px;
-  border: 1px solid #ccc;
-  margin-left: 20px;
-}
-
-button.search {
-  text-indent: -999px;
-  overflow: hidden;
-  width: 40px;
-  padding: 6px;
-  margin-bottom: 1px;
-  border: 1px solid transparent;
-  border-radius: inherit;
-  background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat center;
-  cursor: pointer;
-  background-color: #ff7800
+  display: inline-flex;
 }
 
 </style>

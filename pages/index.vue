@@ -1,13 +1,15 @@
+<script setup>
+import { ElButton } from 'element-plus'
+</script>
+
 <template>
   <div id="wrapper">
-    <div id="goose"><img src="~/assets/img/goose.png"></div>
+    <div id="goose"><img src="~/assets/img/goose.png" alt="Produce Goose"></div>
     <div id="text">
       <h1>Fresh! Local! Fun!</h1>
         <h2>Order fresh produce from the comfort of your own home from local, organic farms with a few clicks!</h2>
         <NuxtLink to="/shop" class="reglink">
-        <button>
-            Shop Now!
-          </button>
+        <el-button type="primary">Shop Now</el-button>
         </NuxtLink>
     </div>
   </div>
@@ -15,11 +17,11 @@
 <style scoped>
 
 #wrapper{
-display: flex;
-justify-content: center;
-align-items: center;
-min-height: 95vh;
-position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 95vh;
+  position: relative;
 }
 #goose{
   margin-right: 600px;
