@@ -9,9 +9,9 @@
 </script>
   
 <template>
-    
+  
     <div class="frontPage">
-      <div> <img :src=url> </div>
+      <div> <img :src="url"> </div>
       
       <div id="text">
           <h1>Fresh! Local! Fun!</h1>

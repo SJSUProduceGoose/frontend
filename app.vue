@@ -1,7 +1,4 @@
-
 <template>
-   <landingPage/>
- 
-
+  <NuxtPage/>
 </template>
 
