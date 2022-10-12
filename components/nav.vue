@@ -1,21 +1,21 @@
 <template>
   <div class="header">
     <div class="title">
-      <a class="reglink" href="/landingpage">
+      <a class="reglink" href="/">
       OFS Farms
       </a>
     </div>
     <div class="hlinks">
       <ul>
         <li class="hlink-item">
-          <a class="reglink" href="/Shop">
+          <NuxtLink to="/Shop" class="reglink">
             Shop
-          </a>
+          </NuxtLink>
         </li>
         <li class="hlink-item">
-          <a class="reglink" href="/Login">
+          <NuxtLink to="/Login" class="reglink">
              Login
-          </a>
+          </NuxtLink>
         </li>
         <li>
           <input type="text" placeholder="Search">
