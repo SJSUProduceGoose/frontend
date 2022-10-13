@@ -8,24 +8,21 @@
           <h1>Fresh! Local! Fun!</h1>
           <h2>Order fresh produce from the comfort of your own home from local, organic farms with a few clicks!</h2>
       </div>
-   
+      <button id="button">Shop Now!</button>
       
 
     </div>
-    <button id="button">Shop Now!</button>
-   
+    
     
     
 </template>
 
 <style scoped>
-  body{
-    position: relative;
-  }
+
 .frontPage{
   display: flex;
   width: 1000px;
-
+  position: relative;
   margin-left: 400px;
   margin-top: 200px;
   color: orange;
@@ -50,12 +47,12 @@ h2{
 }
 #button
 {
-  margin-left: 900px;
-  position: relative;
-  bottom: 150px;
   border: none;
   background-color: darkorange;
   padding: 10px;
+  position: absolute;
+  top: 400px;
+  left: 500px;
   color: white;
   height: 50px;
   width: 150px;
