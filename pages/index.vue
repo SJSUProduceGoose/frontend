@@ -8,39 +8,34 @@
     </div>
   </div>
 </template>
-
 <style scoped>
-
-
 #wrapper{
 display: flex;
 justify-content: center;
 align-items: center;
 min-height: 95vh;
 position: relative;
-
-
-
-
-
 }
 #goose{
-  margin-right: 400px;
-  height:400px;
+  margin-right: 600px;
+  height:600px;
   width: 500px;
-
-
 }
 img{
-height:400px;
+height:600px;
 width: 500px;
 }
-
 #text{
 position: absolute;
-left: 50%;
+left: 49%;
 color: orange;
-width: 500px;
+width: 500px; 
+}
+h1{
+  font-size: 50px;
+}
+h2{
+  font-size: 22px;
 }
 button{
   border: none;
@@ -49,7 +44,7 @@ button{
   color: white;
   height: 50px;
   width: 150px;
-  font-size: 0.9em;
+  font-size: 20px;
   font-weight: bold;
 }
 </style>
