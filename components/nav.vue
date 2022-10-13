@@ -73,10 +73,6 @@ const userStore = useUserStore()
   min-width: 1400px;
 }
 
-* {
-  font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
 .reglink {
   cursor: default;
   pointer-events: visible;        
