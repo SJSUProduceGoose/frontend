@@ -13,7 +13,7 @@
           </NuxtLink>
         </li>
         <li class="hlink-item">
-          <NuxtLink to="/Login" class="reglink">
+          <NuxtLink to="/login" class="reglink">
              Login
           </NuxtLink>
         </li>
