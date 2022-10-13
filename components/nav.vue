@@ -8,7 +8,7 @@
     <div class="hlinks">
       <ul>
         <li class="hlink-item">
-          <NuxtLink to="/Shop" class="reglink">
+          <NuxtLink to="/shop" class="reglink">
             Shop
           </NuxtLink>
         </li>
