@@ -4,7 +4,7 @@ import { ElButton } from 'element-plus'
 
 <template>
   <div id="wrapper">
-    <div id="goose"><img src="~/assets/img/goose.png" alt="Produce Goose"></div>
+    <div id="goose"><img src="~/assets/img/produce-goose.png" alt="Produce Goose"></div>
     <div id="text">
       <h1>Fresh! Local! Fun!</h1>
         <h2>Order fresh produce from the comfort of your own home from local, organic farms with a few clicks!</h2>
