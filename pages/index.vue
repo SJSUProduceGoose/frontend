@@ -36,7 +36,7 @@ h1{
 }
 h2{
   font-size: 22px;
-  margin-top: 15px;
+  margin-top: 16px;
 }
 button{
   border: none;
@@ -47,6 +47,6 @@ button{
   width: 150px;
   font-size: 20px;
   font-weight: bold;
-  margin-top: 15px;
+  margin-top: 16px;
 }
 </style>
