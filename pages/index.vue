@@ -18,7 +18,7 @@ position: relative;
 }
 #goose{
   margin-right: 600px;
-  height:600px;
+  height:500px;
   width: 500px;
 }
 img{
@@ -28,7 +28,7 @@ width: 500px;
 #text{
 position: absolute;
 left: 49%;
-color: orange;
+color: #ff7800;
 width: 500px; 
 }
 h1{
@@ -36,15 +36,17 @@ h1{
 }
 h2{
   font-size: 22px;
+  margin-top: 16px;
 }
 button{
   border: none;
-  background-color: darkorange;
+  background-color: #ff7800;
   padding: 10px;
   color: white;
   height: 50px;
   width: 150px;
   font-size: 20px;
   font-weight: bold;
+  margin-top: 16px;
 }
 </style>
