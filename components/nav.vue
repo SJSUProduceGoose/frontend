@@ -32,6 +32,10 @@
 .header {
   background-color: rgb(23, 162, 255);
   display: flex;
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 100;
 }
 
 * {
@@ -100,4 +104,5 @@ button[type="submit"] {
   cursor: pointer;
   background-color:#ff960d
 }
+
 </style>
