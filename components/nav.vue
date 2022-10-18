@@ -21,7 +21,7 @@
           <input type="text" placeholder="Search">
         </li>   
         <li>
-          <button class="btn" type="submit">Search</button>
+          <button type="submit">Search</button>
         </li>
       </ul>
     </div>
@@ -63,10 +63,6 @@
   font-size: 25px;
   margin-left: 10px;
   margin-right: 20px;
-}
-.btn {
-  background-color: #ff960d;
-  padding: 3px; 
 }
 
 .mcolor {
