@@ -36,4 +36,12 @@
   width: 90%;
   max-width: 500px;
 }
+.btn-primary {
+  background-color: rgb(23, 162, 255);
+  border-color: rgb(23, 162, 255);
+}
+.btn-primary:hover {
+  background-color: rgb(0 153 255);
+  border-color: rgb(0 153 255);
+}
 </style>
