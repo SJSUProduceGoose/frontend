@@ -1,7 +1,5 @@
 <template>
-
 <div class="wrap">
-  
   <div class="box">
     <img src="~/assets/img/veggies.png">
     <p>Vegatables</p>
@@ -35,54 +33,33 @@
     <p>Supplements</p>
   </div>
 </div>
-
-
 </template>
 <style scoped>
-
-body{
-    background-color: lightgray;
-    
-}
 img{
     width: 300px;
     height: 230px;
 }
 .wrap
 {
-    background-color: lightgray;
+    background-color: rgba(211, 211, 211, 0.678);
     place-items: center;   
     align-content: center;
     justify-content: center;
-    grid-template-columns: repeat(4, 350px);
+    grid-template-columns: repeat(4, 400px);
     grid-template-rows: repeat(2, 350px);
     display: grid;
     min-height: 95vh;
     min-width: 100vw;
-
-   
-  
-  
-
-
- 
-  
-  
-
 }
 p{
    font-size: 45px;
-   font-weight: bold;
+   
    letter-spacing: 1px;
-   font-family: 'Times New Roman', Times, serif;
 }
-
 .box
 {
   text-align: center;
-  
-
- background-color: white;
+  background-color: white;
   width: 300px;
   height: 300px;
   cursor: default;
@@ -90,14 +67,8 @@ p{
   text-decoration: none;
   color: #ff7800;
   transition: box-shadow 0.5s;
- 
-
 }
-
 .box:hover{
     box-shadow: 0 15px 20px rgba(0, 0, 0, 0.15);
 }
-
-
-
 </style>
