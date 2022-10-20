@@ -2,18 +2,38 @@
 
 <div class="wrap">
   
-  <div id="box">
+  <div class="box">
     <img src="~/assets/img/veggies.png">
+    <p>Vegatables</p>
+  </div>
+  <div class="box">
+    <img src="~/assets/img/fruits.jpg">
     <p>Fruits</p>
   </div>
-  <div id="box2">b</div>
-   <div id="box3">c</div>
-   <div id="box4">d</div>
-  <div id="box5">d</div>
-  <div id="box5">f</div>
-  <div id="box6">f</div>
-  <div id="box6">f</div>
-
+  <div class="box">
+    <img src="~/assets/img/snacks.jpg">
+    <p>Snacks</p>
+  </div>
+  <div class="box">
+    <img src="~/assets/img/grains.jpg">
+    <p>Grains & Nuts</p>
+  </div>
+  <div class="box">
+    <img src="~/assets/img/dairy.jpg">
+    <p>Dairy & Eggs</p>
+  </div>
+  <div class="box">
+    <img src="~/assets/img/meats.jpg">
+    <p>Meats</p>
+  </div>
+  <div class="box">
+    <img src="~/assets/img/spices.jpg">
+    <p>Spices</p>
+  </div>
+  <div class="box">
+    <img src="~/assets/img/supplements.jpg">
+    <p>Supplements</p>
+  </div>
 </div>
 
 
@@ -26,15 +46,16 @@ body{
 }
 img{
     width: 300px;
+    height: 230px;
 }
 .wrap
 {
-    
+    background-color: lightgray;
     place-items: center;   
     align-content: center;
     justify-content: center;
     grid-template-columns: repeat(4, 350px);
-  grid-template-rows: repeat(2, 350px);
+    grid-template-rows: repeat(2, 350px);
     display: grid;
     min-height: 95vh;
     min-width: 100vw;
@@ -50,18 +71,18 @@ img{
 
 }
 p{
-   font-size: 50px;
+   font-size: 45px;
    font-weight: bold;
    letter-spacing: 1px;
    font-family: 'Times New Roman', Times, serif;
 }
 
-#box
+.box
 {
   text-align: center;
   
 
- 
+ background-color: white;
   width: 300px;
   height: 300px;
   cursor: default;
@@ -73,39 +94,10 @@ p{
 
 }
 
-#box:hover{
+.box:hover{
     box-shadow: 0 15px 20px rgba(0, 0, 0, 0.15);
 }
 
-#box2
-{
-  background-color: orange;
-  width: 300px;
-  height: 300px;
-}
-#box3
-{
-  background-color: green;
-  width: 300px;
-  height: 300px;
-}
-#box4
-{
-  background-color: blue;
-  width: 300px;
-  height: 300px;
-}
-#box5
-{
-  background-color: pink;
-  width: 300px;
-  height: 300px;
-}
-#box6
-{
-  background-color: black;
-  width: 300px;
-  height: 300px;
-}
+
 
 </style>
