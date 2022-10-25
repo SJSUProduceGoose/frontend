@@ -9,6 +9,7 @@
   </div>
 </template>
 <style scoped>
+
 #wrapper{
 display: flex;
 justify-content: center;
