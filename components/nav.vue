@@ -1,3 +1,13 @@
+<script setup>
+const input = ref('');
+const searchResults = ref([])
+
+async function onSearchClick() {
+  const { items } = await $fetch(`https://produce-goose-backend-stg.herokuapp.com/search/?q=${input.value}`);
+  searchResults.value = items;
+}
+</script>
+
 <template>
   <div class="header">
     <div class="title">
@@ -17,11 +27,12 @@
              Login
           </NuxtLink>
         </li>
+      
         <li>
-          <input type="text" placeholder="Search">
+          <input v-model="input" type="text" placeholder="Search">
         </li>   
         <li>
-          <button type="submit">Search</button>
+          <button @click="onSearchClick" class="search">Search</button>
         </li>
       </ul>
     </div>
@@ -93,7 +104,7 @@ li {
   margin-left: 20px;
 }
 
-button[type="submit"] {
+button.search {
   text-indent: -999px;
   overflow: hidden;
   width: 40px;
