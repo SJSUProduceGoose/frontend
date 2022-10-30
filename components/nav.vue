@@ -1,4 +1,8 @@
 <script setup>
+
+import { useUserStore } from "@/store/user";
+
+const userStore = useUserStore()
 const input = ref('');
 const searchResults = ref([])
 
@@ -6,8 +10,8 @@ async function onSearchClick() {
   const { items } = await $fetch(`https://produce-goose-backend-stg.herokuapp.com/search/?q=${input.value}`);
   searchResults.value = items;
 }
-</script>
 
+</script>
 <template>
   <div class="header">
     <div class="title">
@@ -22,9 +26,12 @@ async function onSearchClick() {
             Shop
           </NuxtLink>
         </li>
-        <li class="hlink-item">
-          <NuxtLink to="/login" class="reglink">
+        <li class="hlink-item" >
+          <NuxtLink v-if="userStore.user === null" to="/login" class="reglink">
              Login
+          </NuxtLink>
+          <NuxtLink v-else="userStore.user === null" to="/account" class="reglink">
+             Account
           </NuxtLink>
         </li>
       
