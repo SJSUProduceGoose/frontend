@@ -1,3 +1,10 @@
+<script setup>
+import { useUserStore } from "@/store/user";
+
+const userStore = useUserStore()
+const router = useRouter()
+
+</script>
 <template>
   <div class="header">
     <div class="title">
@@ -12,9 +19,12 @@
             Shop
           </NuxtLink>
         </li>
-        <li class="hlink-item">
-          <NuxtLink to="/login" class="reglink">
+        <li class="hlink-item" >
+          <NuxtLink v-if="userStore.user === null" to="/login" class="reglink">
              Login
+          </NuxtLink>
+          <NuxtLink v-else="userStore.user === null" to="/account" class="reglink">
+             Account
           </NuxtLink>
         </li>
         <li>
