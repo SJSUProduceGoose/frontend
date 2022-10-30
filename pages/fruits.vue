@@ -88,19 +88,49 @@ const products = ref([
     <div class="wrap">
         <div v-for="product in products" class="box">
           <img :src="product.image_url" >
-          <h3>{{ product.name }}</h3>
+          <div class="name">
+            {{ product.name }} <button class="btn">CART</button>
+          </div>
+          <div class="price">
+            ${{ product.price }}
+          </div>
             <!-- {{JSON.stringify(product)}} -->
         </div>
-    </div>
+      </div>
 </template>
 <style scoped>
+
+.btn{
+  border: none;
+  background-color: #ff7800;
+  padding: 10px;
+  color: white;
+  height: 40px;
+  width: 100px;
+  font-size: 15px;
+  font-weight: bold;
+  border-radius: 20px;
+  text-align: center;
+  float: right;
+  margin-top: 7px;
+  margin-right: 7px;
+}
+.name{
+  font-size: 35px;
+  font-weight: 500;
+  margin-left: 5px;
+}
+
+.price{
+  margin-left: 5px;
+}
 .link {
   text-decoration: none;
 }
 
 img {
-  width: 300px;
-  height: 230px;
+  width: 370px;
+  height: 280px;
 }
 
 .wrap {
@@ -108,7 +138,7 @@ img {
   place-items: center;
   align-content: center;
   justify-content: center;
-  grid-template-columns: repeat(4, 400px);
+  grid-template-columns: repeat(4, 500px);
   grid-template-rows: repeat(2, 500px);
   display: grid;
   min-height: 95vh;
@@ -116,21 +146,21 @@ img {
 }
 
 p {
-  font-size: 45px;
+  font-size: 35px;
 
   letter-spacing: 1px;
 }
 
 .box {
-  text-align: center;
   background-color: white;
-  width: 300px;
-  height: 300px;
+  width: 370px;
+  height: 370px;
   cursor: default;
   pointer-events: visible;
   text-decoration: none;
   color: #ff7800;
   transition: box-shadow 0.5s;
+  font-size: 25px;
 }
 
 .box:hover {
