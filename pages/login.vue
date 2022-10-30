@@ -1,14 +1,44 @@
+<script setup>
+import { useUserStore } from "@/store/user";
+
+const username = ref('jeff.bezos@sjsu.edu')
+const password = ref('superuser')
+const userStore = useUserStore()
+const router = useRouter()
+
+async function onSubmit(e) {
+  e.preventDefault();
+
+  const formData = new FormData()
+  
+  formData.append('username', username.value)
+  formData.append('password', password.value)
+
+  try {
+    const response = await useApi('/auth/token/', {
+      method: 'POST',
+      body: formData
+    })
+    userStore.setWithUserToken(response.access_token)
+    router.push('/shop')
+  } catch (error) {
+    // TODO: nicer notifications
+    alert(error.data.detail);
+  }
+}
+</script>
+
 <template>
   <div class="container">
-    <form class="card p-4">
+    <form class="card p-4" @submit="onSubmit">
         <h3 class="mb-4">Login</h3>
         <div class="mb-3">
           <label for="username" class="form-label">Username</label>
-          <input autofocus type="text" class="form-control" id="username" name="username">
+          <input v-model="username" autofocus type="text" class="form-control" id="username" name="username">
         </div>
         <div class="mb-3">
           <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" id="password" name="password" aria-describedby="password">
+          <input v-model="password" type="password" class="form-control" id="password" name="password" aria-describedby="password">
         </div>
         <button type="submit" class="btn btn-primary mb-3 w-100">Submit</button>
         <small>
