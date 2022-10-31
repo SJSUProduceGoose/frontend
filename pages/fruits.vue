@@ -89,7 +89,7 @@ const products = ref([
         <div v-for="product in products" class="box">
           <img :src="product.image_url" >
           <div class="name">
-            {{ product.name }} <button class="btn">CART</button>
+            {{ product.name }} <button class="btn">ADD TO CART</button>
           </div>
           <div class="price">
             ${{ product.price }}
@@ -107,7 +107,7 @@ const products = ref([
   color: white;
   height: 40px;
   width: 100px;
-  font-size: 15px;
+  font-size: 12px;
   font-weight: bold;
   border-radius: 20px;
   text-align: center;
@@ -129,8 +129,11 @@ const products = ref([
 }
 
 img {
-  width: 370px;
-  height: 280px;
+  width: 100%;
+  height: 76%;
+}
+.box img{
+  object-fit: cover;
 }
 
 .wrap {
