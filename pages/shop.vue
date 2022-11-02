@@ -6,7 +6,7 @@
         <p>Vegatables</p>
       </div>
     </NuxtLink>
-    <NuxtLink to="/fruits" class="link">
+    <NuxtLink to="/category/fruits" class="link">
       <div class="box">
         <img src="~/assets/img/fruits.jpg">
         <p>Fruits</p>
