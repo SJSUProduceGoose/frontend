@@ -10,8 +10,8 @@ async function onSearchClick() {
   const { items } = await $fetch(`https://produce-goose-backend-stg.herokuapp.com/search/?q=${input.value}`);
   searchResults.value = items;
 }
-</script>
 
+</script>
 <template>
   <div class="header">
     <div class="title">
@@ -34,6 +34,7 @@ async function onSearchClick() {
              Account
           </NuxtLink>
         </li>
+      
         <li>
           <input v-model="input" type="text" placeholder="Search">
         </li>   
