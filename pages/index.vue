@@ -4,7 +4,11 @@
     <div id="text">
       <h1>Fresh! Local! Fun!</h1>
         <h2>Order fresh produce from the comfort of your own home from local, organic farms with a few clicks!</h2>
-        <button>Shop Now!</button>
+        <NuxtLink to="/shop" class="reglink">
+        <button>
+            Shop Now!
+          </button>
+        </NuxtLink>
     </div>
   </div>
 </template>
@@ -49,5 +53,17 @@ button{
   font-size: 20px;
   font-weight: bold;
   margin-top: 16px;
+}
+
+.reglink{
+  cursor: default;
+  pointer-events: visible;        
+  text-decoration: none;
+  color: white;
+}
+
+button:hover {
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.15);
+  transition: box-shadow 0.5s;
 }
 </style>
