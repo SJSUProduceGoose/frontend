@@ -16,14 +16,16 @@ const userStore = useUserStore()
 
 <template>
     <el-menu
-      style="width: 100%;flex-direction: space-between;"
+      style="width: 100%;flex-direction: space-between;position: absolute; left: 0; top: 0;"
       :default-active="activeIndex"
       mode="horizontal"
       router
     >
-      <div style="padding: 0 1rem; display: flex; align-items: center;">
-        <h3>OFS Farms</h3>
-      </div> 
+      <NuxtLink custom to="/" v-slot="{ navigate }">
+        <div @click="navigate" class="header-logo">
+          <h3>OFS Farms</h3> 
+        </div> 
+      </NuxtLink>
       <el-menu-item index="/shop">Shop</el-menu-item>
       <el-menu-item v-if="userStore.user === null" index="/login">Login</el-menu-item>
       <el-menu-item v-else index="/account">Account</el-menu-item>
@@ -50,3 +52,20 @@ const userStore = useUserStore()
       </div>
     </el-menu>
 </template>
+
+<style scoped lang="scss">
+.header-logo {
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+
+  h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--pg-color-primary);
+  }
+
+  cursor: pointer;
+}
+</style>
