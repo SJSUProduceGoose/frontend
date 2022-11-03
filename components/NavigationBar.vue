@@ -16,8 +16,7 @@ const userStore = useUserStore()
 
 <template>
     <el-menu
-      style="width: 100%;flex-direction: space-between;position: absolute; left: 0; top: 0;"
-      :default-active="activeIndex"
+      class="header-menu"
       mode="horizontal"
       router
     >
@@ -54,6 +53,15 @@ const userStore = useUserStore()
 </template>
 
 <style scoped lang="scss">
+.header-menu {
+  width: 100%;
+  flex-direction: space-between;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+}
+
 .header-logo {
   padding: 0 1rem;
   display: flex;

@@ -1,5 +1,5 @@
 <script setup>
-import { ElCard, ElButton, ElPageHeader } from 'element-plus'
+import { ElButton, ElPageHeader } from 'element-plus'
 import { ArrowLeft } from '@element-plus/icons-vue'
 import {
   ArrowRightBold

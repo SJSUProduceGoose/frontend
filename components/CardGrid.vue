@@ -1,11 +1,6 @@
 <script setup>
-import { ElCard, ElButton, ElPageHeader } from 'element-plus'
-import { ArrowLeft } from '@element-plus/icons-vue'
-import {
-  ArrowRightBold
-} from '@element-plus/icons-vue'
+import { ElCard } from 'element-plus'
 
-const router = useRouter()
 const props = defineProps({
   objects: Array
 })
