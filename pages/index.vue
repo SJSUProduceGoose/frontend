@@ -7,10 +7,10 @@ import { ElButton } from 'element-plus'
     <img id="goose" src="~/assets/img/produce-goose.png" alt="Produce Goose">
     <div id="text">
       <h1>Fresh! Local! Fun!</h1>
-        <h2>Order fresh produce from the comfort of your own home from local, organic farms with a few clicks!</h2>
-        <NuxtLink custom to="/shop" v-slot="{ navigate }">
-          <el-button type="primary" class="action-button" @click="navigate">Shop Now</el-button>
-        </NuxtLink>
+      <h2>Order fresh produce from the comfort of your own home from local, organic farms with a few clicks!</h2>
+      <NuxtLink custom to="/shop" v-slot="{ navigate }">
+        <el-button type="primary" class="action-button" @click="navigate">Shop Now</el-button>
+      </NuxtLink>
     </div>
   </div>
 </template>
@@ -20,27 +20,25 @@ import { ElButton } from 'element-plus'
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 95vh;
   position: relative;
+  height: 100%;
 }
 
-#goose{
-  margin-right: 600px;
-  height:500px;
+#goose {
+  height: 500px;
   width: 500px;
 }
 
-#text{
-position: absolute;
-left: 49%;
-color: #ff7800;
-width: 500px; 
+#text {
+  color: #ff7800;
+  width: 500px; 
 }
 
-h1{
+h1 {
   font-size: 50px;
 }
-h2{
+
+h2 {
   font-size: 22px;
   margin-top: 16px;
 }
@@ -57,4 +55,20 @@ h2{
     transition: box-shadow 0.5s;
   }
 }
+
+@media screen and (max-width: 1100px) {
+  #text {
+    padding: 0 2rem;
+  }
+  #wrapper {
+    flex-direction: column;
+    height: unset;
+  }
+  #goose{
+    margin: 2rem 0;
+    height: 300px;
+    width: 300px;
+  }
+}
+
 </style>
