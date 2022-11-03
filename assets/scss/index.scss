@@ -11,6 +11,10 @@ html, body {
   background-color: #ECECEC;
 }
 
+body {
+  padding-top: 59px; // the height of the navbar
+}
+
 .auth-container {
   display: flex;
   justify-content: center;

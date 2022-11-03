@@ -1,4 +1,12 @@
 <script setup>
+import { ElCard, ElButton, ElPageHeader } from 'element-plus'
+import { ArrowLeft } from '@element-plus/icons-vue'
+import {
+  Plus
+} from '@element-plus/icons-vue'
+import CardGrid from "@/components/CardGrid.vue";
+
+const router = useRouter();
 const route = useRoute();
 // When accessing /posts/1, route.params.id will be 1
 console.log(route.params.slug);
@@ -90,88 +98,39 @@ const products = ref([
 </script>
 
 <template>
-    <div class="wrap">
-        <div v-for="product in products" class="box">
-          <img :src="product.image_url" >
-          <div class="name">
-            {{ product.name }} <button class="btn">ADD TO CART</button>
+  <div style="padding: 0rem 1rem;">
+    <el-page-header :icon="ArrowLeft" @back="router.go(-1)">
+      <template #content>
+        <span class="text-large font-600 mr-3">Fruits</span>
+      </template>
+    </el-page-header>
+    <CardGrid :objects="products">
+      <template v-slot="{ object }">
+        <div class="card-details">
+          <div>
+            <div class="name">
+              {{ object.name }} 
+            </div>
+            <div class="price">
+              ${{ object.price }}
+            </div>
           </div>
-          <div class="price">
-            ${{ product.price }}
-          </div>
-            <!-- {{JSON.stringify(product)}} -->
+          <el-button circle :icon="Plus" type="primary"></el-button>
         </div>
-      </div>
+      </template>
+    </CardGrid>
+  </div>
 </template>
+
 <style scoped>
 
-.btn{
-  border: none;
-  background-color: #ff7800;
-  padding: 10px;
-  color: white;
-  height: 40px;
-  width: 100px;
-  font-size: 12px;
-  font-weight: bold;
-  border-radius: 20px;
-  text-align: center;
-  float: right;
-  margin-top: 7px;
-  margin-right: 7px;
+.card-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }
+
 .name{
-  font-size: 35px;
-  font-weight: 500;
-  margin-left: 5px;
-}
-
-.price{
-  margin-left: 5px;
-}
-.link {
-  text-decoration: none;
-}
-
-img {
-  width: 100%;
-  height: 76%;
-}
-.box img{
-  object-fit: cover;
-}
-
-.wrap {
-  background-color: rgba(211, 211, 211, 0.678);
-  place-items: center;
-  align-content: center;
-  justify-content: center;
-  grid-template-columns: repeat(4, 500px);
-  grid-template-rows: repeat(2, 500px);
-  display: grid;
-  min-height: 95vh;
-  min-width: 100vw;
-}
-
-p {
-  font-size: 35px;
-
-  letter-spacing: 1px;
-}
-
-.box {
-  background-color: white;
-  width: 370px;
-  height: 370px;
-  cursor: default;
-  pointer-events: visible;
-  text-decoration: none;
-  color: #ff7800;
-  transition: box-shadow 0.5s;
-  font-size: 25px;
-}
-
-.box:hover {
-  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.15);
+  font-size: 24px;
 }
 </style>
