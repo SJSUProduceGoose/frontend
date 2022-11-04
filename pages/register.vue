@@ -8,11 +8,11 @@ const errorText = ref<string>('')
 const formRef = ref<FormInstance>()
 
 const form = reactive({
-  firstname: 'Test',
-  lastname: 'User',
-  username: 'test.user@sjsu.edu',
-  password: 'testuser',
-  confirmPassword: 'testuser',
+  firstname: '',
+  lastname: '',
+  username: '',
+  password: '',
+  confirmPassword: '',
 })
 
 const userStore = useUserStore()
