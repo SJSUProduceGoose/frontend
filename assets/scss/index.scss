@@ -1,0 +1,42 @@
+:root {
+  --pg-color-primary: #FF7800;
+  --pg-color-secondary: #1BACFF;
+}
+
+* {
+  font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html, body {
+  background-color: #ECECEC;
+  margin: 0;
+}
+
+body {
+  padding-top: 59px; // the height of the navbar
+}
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.auth-form-card {
+  width: 90%;
+  max-width: 500px;
+  padding: 1rem;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0,0,0,.125);
+  border-radius: 0.25rem;
+}
