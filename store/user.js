@@ -8,7 +8,15 @@ export const useUserStore = defineStore('user', () => {
     const base64decode = (str) => nuxt.ssrContext ? Buffer.from(str, 'base64').toString('utf-8') : atob(str)
 
     const setWithUserToken = (token) => {
-        user.value = JSON.parse(base64decode(token.split('.')[1]))
+        const sessionInfo = JSON.parse(base64decode(token.split('.')[1]));
+        
+        if (sessionInfo.exp * 1000 > Date.now()) {
+            user.value = sessionInfo;
+        } else {
+            // TODO: redirect to login with error message and redirect to previous page when logging in
+            sessionCookie.value = '';
+            user.value = null;
+        }
     }
     
     const sessionCookie = useCookie('session')
