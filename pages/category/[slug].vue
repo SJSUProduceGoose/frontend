@@ -1,15 +1,15 @@
 <script setup>
-import { ElCard, ElButton, ElPageHeader } from 'element-plus'
-import { ArrowLeft } from '@element-plus/icons-vue'
-import {
-  Plus
-} from '@element-plus/icons-vue'
-import CardGrid from "@/components/CardGrid.vue";
+import { ElButton } from 'element-plus'
+import { Plus } from '@element-plus/icons-vue'
+import { usePageHeaderStore } from '@/store/pageHeader'
 
-const router = useRouter();
 const route = useRoute();
 // When accessing /posts/1, route.params.id will be 1
 console.log(route.params.slug);
+const pageHeaderStore = usePageHeaderStore()
+pageHeaderStore.setOptions({
+  title: 'Fruits'
+})
 //const results = useFetch(`https://produce-goose-backend-stg.herokuapp.com/product/list?category=${route.params.slug}`);
 
 const products = ref([
@@ -98,39 +98,17 @@ const products = ref([
 </script>
 
 <template>
-  <div style="padding: 0rem 1rem;">
-    <el-page-header :icon="ArrowLeft" @back="router.go(-1)">
-      <template #content>
-        <span class="text-large font-600 mr-3">Fruits</span>
-      </template>
-    </el-page-header>
-    <CardGrid :objects="products">
-      <template v-slot="{ object }">
-        <div class="card-details">
-          <div>
-            <div class="name">
-              {{ object.name }} 
-            </div>
-            <div class="price">
-              ${{ object.price }}
-            </div>
+  <CardGrid :objects="products">
+    <template v-slot="{ object }">
+      <div class="flex justify-between items-end">
+        <div>
+          <div class="text-2xl">
+            {{ object.name }} 
           </div>
-          <el-button circle :icon="Plus" type="primary"></el-button>
+          <div>${{ object.price }}</div>
         </div>
-      </template>
-    </CardGrid>
-  </div>
+        <el-button circle :icon="Plus" type="primary"></el-button>
+      </div>
+    </template>
+  </CardGrid>
 </template>
-
-<style scoped>
-
-.card-details {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-
-.name{
-  font-size: 24px;
-}
-</style>

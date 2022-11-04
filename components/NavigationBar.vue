@@ -16,18 +16,25 @@ const userStore = useUserStore()
 
 <template>
     <el-menu
-      class="header-menu"
+      class="navigation-menu"
       mode="horizontal"
+      ellipsis
       router
     >
       <NuxtLink custom to="/" v-slot="{ navigate }">
-        <div @click="navigate" class="header-logo">
-          <h3>OFS Farms</h3> 
+        <div @click="navigate" class="flex items-center justify-center px-3 cursor-pointer">
+          <span class="whitespace-nowrap text-2xl font-bold text-pg-primary">OFS Farms</span> 
         </div> 
       </NuxtLink>
       <el-menu-item index="/shop">Shop</el-menu-item>
-      <el-menu-item v-if="userStore.user === null" index="/login">Login</el-menu-item>
-      <el-menu-item v-else index="/account">Account</el-menu-item>
+      <template v-if="userStore.user === null">
+        <el-menu-item index="/login">Login</el-menu-item>  
+      </template>
+      <template v-else>
+        <el-menu-item index="/account">Account</el-menu-item>
+        <el-menu-item index="/orders">Orders</el-menu-item>
+      </template>
+      
       <div style="display: flex; align-items: center;padding: 0 1rem;">
         <div>
         <el-input
@@ -52,28 +59,12 @@ const userStore = useUserStore()
     </el-menu>
 </template>
 
-<style scoped lang="scss">
-.header-menu {
-  width: 100%;
-  flex-direction: space-between;
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 100;
+<style lang="pcss">
+.navigation-menu {
+  @apply w-full fixed top-0 left-0 z-10;
 }
 
-.header-logo {
-  padding: 0 1rem;
-  display: flex;
-  align-items: center;
-
-  h3 {
-    margin: 0;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--pg-color-primary);
-  }
-
-  cursor: pointer;
+.navigation-logo {
+  @apply flex items-center justify-center px-3 cursor-pointer;
 }
 </style>

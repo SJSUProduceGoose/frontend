@@ -1,12 +1,13 @@
 <script setup>
 import { ElButton, ElPageHeader } from 'element-plus'
-import { ArrowLeft } from '@element-plus/icons-vue'
-import {
-  ArrowRightBold
-} from '@element-plus/icons-vue'
-import CardGrid from "@/components/CardGrid.vue";
+import { ArrowRightBold } from '@element-plus/icons-vue'
+import { usePageHeaderStore } from '@/store/pageHeader'
 
-const router = useRouter()
+const pageHeaderStore = usePageHeaderStore();
+
+pageHeaderStore.setOptions({
+  title: 'Categories'
+})
 
 const categories = ref([
   {
@@ -61,29 +62,14 @@ const categories = ref([
 </script>
 
 <template>
-  <div style="padding: 0rem 1rem;">
-    <el-page-header :icon="ArrowLeft" @back="router.go(-1)">
-      <template #content>
-        <span class="text-large font-600 mr-3">Categories</span>
-      </template>
-    </el-page-header>
-    <CardGrid :objects="categories">
-      <template v-slot="{ object }">
-        <div class="card-details">
-          <span>{{ object.name }}</span>
-          <NuxtLink :to="object.slug">
-            <el-button circle :icon="ArrowRightBold" type="primary"/>
-          </NuxtLink>
-        </div>
-      </template>
-    </CardGrid>
-  </div>
+  <CardGrid :objects="categories">
+    <template v-slot="{ object }">
+      <div class="flex justify-between items-center">
+        <span>{{ object.name }}</span>
+        <NuxtLink :to="object.slug">
+          <el-button circle :icon="ArrowRightBold" type="primary"/>
+        </NuxtLink>
+      </div>
+    </template>
+  </CardGrid>
 </template>
-
-<style scoped lang="scss">
-.card-details {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-</style>

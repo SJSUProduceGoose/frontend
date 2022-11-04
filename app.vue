@@ -1,5 +1,6 @@
 <script setup>
 import { ID_INJECTION_KEY } from 'element-plus'
+
 provide(ID_INJECTION_KEY, {
   prefix: 100,
   current: 0,
@@ -8,8 +9,9 @@ provide(ID_INJECTION_KEY, {
 
 <template>
   <div>
-    <Nav/>
-    <div class="content">
+    <NavigationBar/>
+    <div class="content px-4">
+      <PageHeader/>
       <NuxtPage/>
     </div>
   </div>
@@ -18,6 +20,6 @@ provide(ID_INJECTION_KEY, {
 <style scoped>
 .content {
   /* 60.5px is the height of the header */
-  height: calc(100vh - 60.5px);
+  height: calc(100vh - 59px);
 }
 </style>

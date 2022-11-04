@@ -67,16 +67,3 @@ async function onSubmit(e) {
     </el-form>
   </div>
 </template>
-
-<style>
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-.card {
-  width: 90%;
-  max-width: 500px;
-}
-</style>

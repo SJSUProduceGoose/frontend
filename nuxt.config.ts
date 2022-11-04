@@ -11,10 +11,6 @@ export default defineNuxtConfig({
   // meta
   meta: {
     link: [
-      {
-        rel: "stylesheet",
-        href: "https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-      },
       // TODO: add favicon  
       // {
       //   rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'
@@ -56,7 +52,8 @@ export default defineNuxtConfig({
   modules: [
     '@vueuse/nuxt',
     '@unocss/nuxt',
-    '@pinia/nuxt'
+    '@pinia/nuxt',
+    '@nuxtjs/tailwindcss',
   ],
 
   // auto import components
