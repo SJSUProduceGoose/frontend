@@ -10,9 +10,8 @@ provide(ID_INJECTION_KEY, {
 <template>
 
   <div>
-    <NavigationBar/>
-    <div class="content px-4">
-      <PageHeader/>
+    <Nav/>
+    <div class="content">
       <NuxtPage/>
     </div>
   </div>
