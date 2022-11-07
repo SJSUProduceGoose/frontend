@@ -13,13 +13,13 @@ const categories = ref([
   {
     id: 1,
     name: 'Vegatables',
-    slug: '/category/fruits',
+    slug: '/category/vegatables',
     image_url: 'https://images.unsplash.com/photo-1597362925123-77861d3fbac7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
   },
   {
     id: 2,
     name: 'Fruits',
-    slug: '/category/vegetables',
+    slug: '/category/fruits',
     image_url: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80',
   },
   {

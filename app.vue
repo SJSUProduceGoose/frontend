@@ -8,6 +8,7 @@ provide(ID_INJECTION_KEY, {
 </script>
 
 <template>
+
   <div>
     <NavigationBar/>
     <div class="content px-4">
