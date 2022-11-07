@@ -20,13 +20,13 @@ const userStore = useUserStore()
     <NuxtLink custom to="/" v-slot="{ navigate }">
       <div @click="navigate" class="flex items-center justify-center px-3 cursor-pointer">
         <span class="whitespace-nowrap text-2xl font-bold text-pg-primary">OFS Farms</span>
-        <el-button @click="visible = true" :style="{backgroundColor: '#14aeff'}" class="absolute right-5">
+        <el-button color="#14aeff" bg="true" @click="visible = true" class="absolute right-5">
           <el-icon class="el-icon--center" :size="28" color="white">
             <ShoppingCart />
           </el-icon>
         </el-button>
 
-        <ClientOnly>
+        <client-only>
           <el-drawer v-model="visible" :show-close="false">
             <template #header="{ close, titleId, titleClass }">
               <h4 :id="titleId" :class="titleClass">This is a custom header!</h4>
@@ -39,7 +39,7 @@ const userStore = useUserStore()
             </template>
             This is drawer content.
           </el-drawer>
-        </ClientOnly>
+        </client-only>
       </div>
     </NuxtLink>
     <el-menu-item index="/shop">Shop</el-menu-item>
