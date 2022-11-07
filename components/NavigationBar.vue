@@ -1,6 +1,6 @@
 <script setup>
 import { ElButton, ElInput, ElIcon, ElMenu, ElMenuItem, ElDrawer } from 'element-plus'
-import { Search, ShoppingCart} from '@element-plus/icons-vue'
+import { Search, ShoppingCart, CircleCloseFilled} from '@element-plus/icons-vue'
 import { useUserStore } from "@/store/user";
 import { ref } from 'vue'
 const router = useRouter()
@@ -20,7 +20,7 @@ const userStore = useUserStore()
     <NuxtLink custom to="/" v-slot="{ navigate }">
       <div @click="navigate" class="flex items-center justify-center px-3 cursor-pointer">
         <span class="whitespace-nowrap text-2xl font-bold text-pg-primary">OFS Farms</span>
-        <el-button @click="visible = true" color="#14aeff" bg class="absolute right-5">
+        <el-button @click="visible = true" :style="{backgroundColor: '#14aeff'}" class="absolute right-5">
           <el-icon class="el-icon--center" :size="28" color="white">
             <ShoppingCart />
           </el-icon>
