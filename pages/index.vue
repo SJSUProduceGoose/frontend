@@ -9,7 +9,7 @@ import { ElButton } from 'element-plus'
       <h1>Fresh! Local! Fun!</h1>
       <h2>Order fresh produce from the comfort of your own home from local, organic farms with a few clicks!</h2>
       <NuxtLink custom to="/shop" v-slot="{ navigate }">
-        <el-button type="primary" bg="true" class="action-button" @click="navigate">Shop Now</el-button>
+        <el-button type="primary" class="action-button" @click="navigate">Shop Now</el-button>
       </NuxtLink>
     </div>
   </div>
