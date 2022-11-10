@@ -50,7 +50,7 @@ const getObject = (obj) => {
 @media screen and (max-width: 1500px) {
   .card-grid {
     max-width: 1100px;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     grid-template-rows: auto;
   }
 }
@@ -58,7 +58,7 @@ const getObject = (obj) => {
 @media screen and (max-width: 1200px) {
   .card-grid {
     max-width: 800px;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 

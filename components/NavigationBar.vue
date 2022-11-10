@@ -1,6 +1,6 @@
 <script setup>
 import { ElButton, ElInput, ElIcon, ElMenu, ElMenuItem, ElDrawer, ElInputNumber } from 'element-plus'
-import { Search, ShoppingCart, CircleCloseFilled} from '@element-plus/icons-vue'
+import { Search, ShoppingCart } from '@element-plus/icons-vue'
 import { useUserStore } from "@/store/user";
 import { ref } from 'vue'
 const router = useRouter()
@@ -138,13 +138,11 @@ const num = ref(1)
         <client-only>
           <el-drawer v-model="visible" :show-close="false">
             <template #header="{ close, titleId, titleClass }">
-              <h4 :id="titleId" :class="titleClass">ProduceGoose Cart</h4>
-              <el-button type="danger" @click="close">
-                <el-icon class="el-icon--left">
-                  <CircleCloseFilled />
-                </el-icon>
-                Close
+              <b :id="titleId" :class="titleClass">ProduceGoose Cart</b>
+              <NuxtLink to="/checkout"><el-button type="danger">
+                Checkout
               </el-button>
+              </NuxtLink>
             </template>
             <Cart :objects="products" objectKey="product">
               <template v-slot="{ object }">
@@ -200,5 +198,9 @@ const num = ref(1)
 
 .navigation-logo {
   @apply flex items-center justify-center px-3 cursor-pointer;
+}
+
+b {
+  font-size: 40px;
 }
 </style>
