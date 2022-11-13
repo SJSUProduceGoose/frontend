@@ -2,7 +2,7 @@
 import { ElButton } from 'element-plus'
 import { Plus } from '@element-plus/icons-vue'
 import { usePageHeaderStore } from '@/store/pageHeader'
-
+import { add } from '@/store/cart'
 const route = useRoute();
 // When accessing /posts/1, route.params.id will be 1
 console.log(route.params.slug);
@@ -14,6 +14,7 @@ pageHeaderStore.setOptions({
 
 const products = ref([
   {
+    "minquantity": 1,
     "id": 1,
     "category_id": 2,
     "slug": "apples",
@@ -24,6 +25,7 @@ const products = ref([
     "price": 1.99
   },
   {
+    "minquantity": 1,
     "id": 2,
     "category_id": 2,
     "slug": "oranges",
@@ -34,6 +36,7 @@ const products = ref([
     "price": 1.99
   },
   {
+    "minquantity": 1,
     "id": 3,
     "category_id": 2,
     "slug": "peaches",
@@ -44,6 +47,7 @@ const products = ref([
     "price": 1.99
   },
   {
+    "minquantity": 1,
     "id": 4,
     "category_id": 2,
     "slug": "strawberries",
@@ -54,6 +58,7 @@ const products = ref([
     "price": 1.99
   },
   {
+    "minquantity": 1,
     "id": 5,
     "category_id": 2,
     "slug": "apricots",
@@ -64,6 +69,7 @@ const products = ref([
     "price": 1.99
   },
   {
+    "minquantity": 1,
     "id": 6,
     "category_id": 2,
     "slug": "bananas",
@@ -74,6 +80,7 @@ const products = ref([
     "price": 1.99
   },
   {
+    "minquantity": 1,
     "id": 7,
     "category_id": 2,
     "slug": "black-berries",
@@ -84,6 +91,7 @@ const products = ref([
     "price": 1.99
   },
   {
+    "minquantity": 1,
     "id": 8,
     "category_id": 2,
     "slug": "raspberries",
@@ -107,7 +115,7 @@ const products = ref([
           </div>
           <div>${{ object.price }}</div>
         </div>
-        <el-button circle :icon="Plus" type="primary"></el-button>
+        <el-button circle @click="add(object)" :icon="Plus" type="primary"></el-button>
       </div>
     </template>
   </CardGrid>

@@ -67,7 +67,7 @@ const categories = ref([
       <div class="flex justify-between items-center">
         <span>{{ object.name }}</span>
         <NuxtLink :to="object.slug">
-          <el-button circle :icon="ArrowRightBold" bg="true" type="primary"/>
+          <el-button circle :icon="ArrowRightBold" type="primary"/>
         </NuxtLink>
       </div>
     </template>
