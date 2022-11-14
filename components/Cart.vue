@@ -1,16 +1,18 @@
 <script setup>
 import { ElCard } from 'element-plus'
-import { getCart } from '@/store/cart'
+import { useCartStore } from '@/store/cart'
+
+const cartStore = useCartStore();
 
 </script>
 
 <template>
-  <div class="card-grid pa-4" :objects="getCart()">
-    <el-card v-for="product in getCart()" :key="product.id" class="ma-4" shadow="hover"
+  <div class="card-grid pa-4" :objects="cartStore.items">
+    <el-card v-for="item in cartStore.items" :key="item.product.id" class="ma-4" shadow="hover"
       :body-style="{ padding: '0px' }">
-      <img class="w-full h-60 object-cover" :src="product.image_url" :alt="product.name" />
+      <img class="w-full h-60 object-cover" :src="item.product.image_url" :alt="item.product.name" />
       <div class="p-3">
-        <slot :product="product"></slot>
+        <slot :item="item" :product="item.product"></slot>
       </div>
 
 

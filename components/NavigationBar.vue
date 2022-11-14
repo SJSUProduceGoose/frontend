@@ -3,10 +3,15 @@ import { ElButton, ElInput, ElIcon, ElMenu, ElMenuItem, ElDrawer, ElInputNumber 
 import { Search, ShoppingCart } from '@element-plus/icons-vue'
 import { useUserStore } from "@/store/user";
 import { ref } from 'vue'
-import { getCart } from '@/store/cart'
+import { useCartStore } from '@/store/cart'
+
+const cartStore = useCartStore();
 const router = useRouter()
 const query = ref('');
 const visible = ref(false)
+
+
+
 
 function navigateToSearch() {
   router.push({ path: '/search', query: { q: query.value } })
@@ -14,6 +19,15 @@ function navigateToSearch() {
 }
 
 const userStore = useUserStore()
+
+const formattedPrice = computed(() => {
+  return cartStore.totalPrice.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
+})
+
+const formattedWeight = computed(() => {
+  return cartStore.totalWeight.toLocaleString('en-US', { style: 'unit', unit: 'pound', unitDisplay: 'short' })
+})
+
 
 </script>
 
@@ -29,17 +43,22 @@ const userStore = useUserStore()
         </el-button>
 
         <client-only>
+        
           <el-drawer v-model="visible" :show-close="false">
-            <template #header="{ close, titleId, titleClass }">
-              <b :id="titleId" :class="titleClass">ProduceGoose Cart</b>
+           <template #header="{ close, titleId, titleClass }">
+              <b :id="titleId" :class="titleClass">ProduceGoose Cart </b>
+              <b :id="titleId" :class="titleClass"> Price: {{formattedPrice}} </b>
+              <b :id="titleId" :class="titleClass"> Weight: {{formattedWeight}} </b>
               <NuxtLink to="/checkout">
                 <el-button type="danger">
                   Checkout
                 </el-button>
               </NuxtLink>
             </template>
-            <Cart :objects="getCart()">
-              <template v-slot="{ product }">
+           <Cart :objects="cartStore.items">
+           
+           
+              <template v-slot="{ product, item }">
                 <div class="flex justify-between items-end">
                   <div>
                     <div class="text-2xl">
@@ -47,7 +66,7 @@ const userStore = useUserStore()
                     </div>
                     <div>${{ product.price }}</div>
                   </div>
-                  <ElInputNumber v-model="product.minquantity" :max="product.quantity"></ElInputNumber>
+                  <ElInputNumber v-model="item.quantity" :min="1" :max="product.quantity"></ElInputNumber>
                 </div>
               </template>
             </Cart>
@@ -95,6 +114,6 @@ const userStore = useUserStore()
 }
 
 b {
-  font-size: 40px;
+  font-size: 60px;
 }
 </style>
