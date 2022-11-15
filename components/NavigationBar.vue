@@ -56,18 +56,8 @@ const formattedWeight = computed(() => {
               </NuxtLink>
             </template>
            <Cart :objects="cartStore.items">
-           
-           
               <template v-slot="{ product, item }">
-                <div class="flex justify-between items-end">
-                  <div>
-                    <div class="text-2xl">
-                      {{ product.name }}
-                    </div>
-                    <div>${{ product.price }}</div>
-                  </div>
-                  <ElInputNumber v-model="item.quantity" :min="1" :max="product.quantity"></ElInputNumber>
-                </div>
+                <CartItem :product="product" :item="item" />
               </template>
             </Cart>
           </el-drawer>
