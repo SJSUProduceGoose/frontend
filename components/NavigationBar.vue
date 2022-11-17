@@ -28,14 +28,21 @@ const formattedWeight = computed(() => {
   return cartStore.totalWeight.toLocaleString('en-US', { style: 'unit', unit: 'pound', unitDisplay: 'short' })
 })
 
+const cartCounter= computed(() => {
+  return cartStore.cartCount
+})
+
+
+
+
 
 </script>
 
 <template>
   <el-menu class="navigation-menu" mode="horizontal" ellipsis router>
-    <NuxtLink custom to="/" v-slot="{ navigate }">
-      <div @click="navigate" class="flex items-center justify-center px-3 cursor-pointer">
+      <div class="flex items-center justify-center px-3 cursor-pointer">
         <span class="whitespace-nowrap text-2xl font-bold text-pg-primary">OFS Farms</span>
+        <b class="absolute right-22 text-base"> {{cartCounter}} items in cart</b>
         <el-button color="#14aeff" @click="visible = true" class="absolute right-5">
           <el-icon class="el-icon--center" :size="28" color="white">
             <ShoppingCart />
@@ -63,7 +70,6 @@ const formattedWeight = computed(() => {
           </el-drawer>
         </client-only>
       </div>
-    </NuxtLink>
     <el-menu-item index="/shop">Shop</el-menu-item>
     <template v-if="userStore.user === null">
       <el-menu-item index="/login">Login</el-menu-item>
