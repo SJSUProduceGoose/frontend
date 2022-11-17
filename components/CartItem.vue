@@ -1,6 +1,6 @@
 <script setup>
 import { ElButton, ElInput, ElIcon, ElMenu, ElMenuItem, ElDrawer, ElInputNumber } from 'element-plus'
-import { Search, ShoppingCart } from '@element-plus/icons-vue'
+import { Search, ShoppingCart, Delete } from '@element-plus/icons-vue'
 import { useUserStore } from "@/store/user";
 import { ref } from 'vue'
 import { useCartStore } from '@/store/cart'
@@ -38,12 +38,10 @@ const formattedTotalWeight = computed(() => {
           <ElInputNumber v-model="props.item.quantity" :min="1" :max="props.product.quantity"></ElInputNumber>
         </div>
         <div class="absolute bottom-0 right-0">
-          <el-button @click="cartStore.remove(props.item)" type="danger">
-          Remove
+          <el-button @click="cartStore.remove(props.item)" type="danger" circle>
+            <el-icon :size="16"><Delete/></el-icon>
         </el-button>
         </div>
-        
-        
       </div>
     </div>
     
