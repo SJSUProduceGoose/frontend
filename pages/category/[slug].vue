@@ -2,7 +2,9 @@
 import { ElButton } from 'element-plus'
 import { Plus } from '@element-plus/icons-vue'
 import { usePageHeaderStore } from '@/store/pageHeader'
+import { useCartStore } from '@/store/cart'
 
+const cartStore = useCartStore();
 const route = useRoute();
 // When accessing /posts/1, route.params.id will be 1
 console.log(route.params.slug);
@@ -13,8 +15,10 @@ pageHeaderStore.setOptions({
 //const results = useFetch(`https://produce-goose-backend-stg.herokuapp.com/product/list?category=${route.params.slug}`);
 
 const products = ref([
+ 
   {
     "id": 1,
+    "weight": 0.3,
     "category_id": 2,
     "slug": "apples",
     "quantity": 20,
@@ -25,6 +29,7 @@ const products = ref([
   },
   {
     "id": 2,
+    "weight": 0.3,
     "category_id": 2,
     "slug": "oranges",
     "quantity": 20,
@@ -35,6 +40,7 @@ const products = ref([
   },
   {
     "id": 3,
+    "weight": 0.3,
     "category_id": 2,
     "slug": "peaches",
     "quantity": 20,
@@ -45,6 +51,7 @@ const products = ref([
   },
   {
     "id": 4,
+    "weight": 0.3,
     "category_id": 2,
     "slug": "strawberries",
     "quantity": 20,
@@ -55,6 +62,7 @@ const products = ref([
   },
   {
     "id": 5,
+    "weight": 0.3,
     "category_id": 2,
     "slug": "apricots",
     "quantity": 20,
@@ -65,6 +73,7 @@ const products = ref([
   },
   {
     "id": 6,
+    "weight": 0.3,
     "category_id": 2,
     "slug": "bananas",
     "quantity": 20,
@@ -75,6 +84,7 @@ const products = ref([
   },
   {
     "id": 7,
+    "weight": 0.3,
     "category_id": 2,
     "slug": "black-berries",
     "quantity": 20,
@@ -85,6 +95,7 @@ const products = ref([
   },
   {
     "id": 8,
+    "weight": 0.3,
     "category_id": 2,
     "slug": "raspberries",
     "quantity": 20,
@@ -107,7 +118,7 @@ const products = ref([
           </div>
           <div>${{ object.price }}</div>
         </div>
-        <el-button circle :icon="Plus" type="primary"></el-button>
+        <el-button circle @click="cartStore.add(object)" :icon="Plus" type="primary"></el-button>
       </div>
     </template>
   </CardGrid>
