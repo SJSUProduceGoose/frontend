@@ -27,16 +27,18 @@ export const useCartStore = defineStore('cartStore', () => {
   const add = (product) => {
     const existingItem = find(product);
     
-    cartCount.value++
-    console.log(cartCount)
+    console.log(product)
     if (existingItem === undefined) {
       items.value.push({
         quantity: 1,
         product
       });
-      
+      cartCount.value++
     } else {
       existingItem.quantity += 1;
+      if(existingItem.quantity <= 20) {
+        cartCount.value++
+      }
     }
   }
 
