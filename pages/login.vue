@@ -1,13 +1,13 @@
 <script setup>
-import { ElButton, ElInput, ElForm, ElFormItem, ElLink, ElAlert } from 'element-plus'
+import { ElButton, ElInput, ElForm, ElFormItem, ElLink, ElAlert, ElNotification } from 'element-plus'
 import { useUserStore } from "@/store/user";
 
 const showError = ref(false)
 const errorText = ref('')
 
 const form = reactive({
-  username: '',
-  password: '',
+  username: 'jeff.bezos@sjsu.edu',
+  password: 'superuser',
 })
 
 const userStore = useUserStore()
@@ -33,6 +33,11 @@ async function onSubmit(e) {
     showError.value = true
     errorText.value = error?.data?.detail || 'An error occurred while logging in.'
   }
+}
+
+if (process.client && userStore.loginNofification !== null) {
+  ElNotification(userStore.loginNofification)
+  userStore.loginNofification.value = null
 }
 
 </script>

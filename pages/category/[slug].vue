@@ -5,14 +5,11 @@ import { usePageHeaderStore } from '@/store/pageHeader'
 import { useCartStore } from '@/store/cart'
 
 const cartStore = useCartStore();
-const route = useRoute();
-// When accessing /posts/1, route.params.id will be 1
-console.log(route.params.slug);
+
 const pageHeaderStore = usePageHeaderStore()
 pageHeaderStore.setOptions({
   title: 'Fruits'
 })
-//const results = useFetch(`https://produce-goose-backend-stg.herokuapp.com/product/list?category=${route.params.slug}`);
 
 const products = ref([
  

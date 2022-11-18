@@ -2,6 +2,7 @@ import { defineStore } from 'pinia'
 
 export const useUserStore = defineStore('user', () => {
     const user = ref(null)
+    const loginNofification = ref(null)
 
     const nuxt = useNuxtApp()
 
@@ -24,8 +25,15 @@ export const useUserStore = defineStore('user', () => {
         setWithUserToken(sessionCookie.value)
     }
 
+    const setupLoginNotification = (message) => {
+        loginNofification.value = message;
+    }
+
     return {
         user,
-        setWithUserToken
+        loginNofification,
+        isLoggedIn: computed(() => user.value !== null),
+        setWithUserToken,
+        setupLoginNotification,
     }
 })

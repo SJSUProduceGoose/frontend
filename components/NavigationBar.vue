@@ -1,5 +1,5 @@
 <script setup>
-import { ElButton, ElInput, ElIcon, ElMenu, ElMenuItem, ElDrawer, ElInputNumber } from 'element-plus'
+import { ElButton, ElInput, ElIcon, ElMenu, ElMenuItem, ElDrawer } from 'element-plus'
 import { Search, ShoppingCart } from '@element-plus/icons-vue'
 import { useUserStore } from "@/store/user";
 import { ref } from 'vue'
@@ -9,9 +9,6 @@ const cartStore = useCartStore();
 const router = useRouter()
 const query = ref('');
 const visible = ref(false)
-
-
-
 
 function navigateToSearch() {
   router.push({ path: '/search', query: { q: query.value } })
@@ -27,30 +24,19 @@ const formattedPrice = computed(() => {
 const formattedWeight = computed(() => {
   return cartStore.totalWeight.toLocaleString('en-US', { style: 'unit', unit: 'pound', unitDisplay: 'short' })
 })
-
-const cartCounter= computed(() => {
-  return cartStore.cartCount
-})
-
-
-
-
-
 </script>
 
 <template>
   <el-menu class="navigation-menu" mode="horizontal" ellipsis router>
       <div class="flex items-center justify-center px-3 cursor-pointer">
         <span class="whitespace-nowrap text-2xl font-bold text-pg-primary">OFS Farms</span>
-        <b class="absolute right-22 text-base"> {{cartCounter}} items in cart</b>
+        <b class="absolute right-22 text-base"> {{ cartStore.itemCount }} items in cart</b>
         <el-button color="#14aeff" @click="visible = true" class="absolute right-5">
           <el-icon class="el-icon--center" :size="28" color="white">
             <ShoppingCart />
           </el-icon>
         </el-button>
-
         <client-only>
-        
           <el-drawer v-model="visible" :show-close="false">
            <template #header="{ close, titleId, titleClass }">
               <b :id="titleId" :class="titleClass">ProduceGoose Cart </b>
