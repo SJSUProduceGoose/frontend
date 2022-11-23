@@ -1,5 +1,5 @@
 <script setup>
-import { ElButton } from 'element-plus'
+import { ElButton, ElInputNumber } from 'element-plus'
 import { Plus } from '@element-plus/icons-vue'
 import { usePageHeaderStore } from '@/store/pageHeader'
 import { useCartStore } from '@/store/cart'
@@ -108,14 +108,19 @@ const products = ref([
 <template>
   <CardGrid :objects="products">
     <template v-slot="{ object }">
-      <div class="flex justify-between items-end">
+      <div class="relative flex justify-between items-end">
         <div>
           <div class="text-2xl">
             {{ object.name }} 
           </div>
           <div>${{ object.price }}</div>
+          <!-- <div class="mt-1.5">
+            <ElInputNumber v-model="object.quantity" :min="0"></ElInputNumber> 
+          </div> -->
         </div>
-        <el-button circle @click="cartStore.add(object)" :icon="Plus" type="primary"></el-button>
+        <div class="absolute bottom-0 right-0">
+          <el-button circle @click="cartStore.add(object)" :icon="Plus" type="primary"></el-button>
+        </div>
       </div>
     </template>
   </CardGrid>

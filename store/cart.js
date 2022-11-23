@@ -16,6 +16,7 @@ export const useCartStore = defineStore('cartStore', () => {
   let fetchCartResponse;
   const userStore = useUserStore()
   const displaySignupPrompt = ref(false);
+  const displayOutOfStock = ref(false);
 
   let pendingProduct = null;
   let firstItemAdded = true;
@@ -47,6 +48,11 @@ export const useCartStore = defineStore('cartStore', () => {
   });
 
   const add = async (product) => {    
+    if(product.quantity == 0){
+      displayOutOfStock.value = true;
+      return;
+    }
+    
     if (!userStore.isLoggedIn && firstItemAdded) {
       firstItemAdded = false;
       pendingProduct = product;
@@ -136,6 +142,7 @@ export const useCartStore = defineStore('cartStore', () => {
     totalWeight,
     totalPrice,
     displaySignupPrompt,
+    displayOutOfStock,
     continueWithoutLogin,
     fetchCart,
   }

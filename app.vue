@@ -40,6 +40,12 @@ cartStore.fetchCart();
           </span>
         </template>
       </el-dialog>
+      <el-dialog
+        v-model="cartStore.displayOutOfStock"
+        title="Out of stock :("
+      >
+        <span>Sorry, we will be restocking this product soon. Thank you for your patience.</span>
+      </el-dialog>
     </ClientOnly>
     <NavigationBar/>
     <div class="content px-4">
