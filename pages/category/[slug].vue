@@ -36,9 +36,15 @@ console.log(data)
             {{ object.name }}
           </div>
           <div>${{ object.price }}</div>
-          <!-- <div class="mt-1.5">
-            <ElInputNumber v-model="object.quantity" :min="0"></ElInputNumber> 
-          </div> -->
+          <div class="flex mt-1.5">
+            <h1 class="mr-2 font-semibold mt-.7">Stock</h1>
+            <ElInputNumber v-model="object.quantity" :min="0"></ElInputNumber>
+            
+          </div>
+          <div class="flex mt-2">
+            <h1 class="mr-2.7 font-semibold mt-.7">Price</h1> 
+            <ElInputNumber v-model="object.price" :min="0"></ElInputNumber>
+          </div>
         </div>
         <div class="absolute bottom-0 right-0">
           <el-button circle @click="cartStore.add(object)" :icon="Plus" type="primary"></el-button>
