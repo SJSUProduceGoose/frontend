@@ -1,6 +1,7 @@
 <script setup>
 import { ID_INJECTION_KEY, ElDialog, ElButton } from 'element-plus'
 import { useCartStore } from "@/store/cart";
+import CartSidebar from "@/components/CartSidebar";
 
 provide(ID_INJECTION_KEY, {
   prefix: 100,
@@ -52,6 +53,7 @@ cartStore.fetchCart();
       <PageHeader/>
       <NuxtPage/>
     </div>
+    <CartSidebar/>
   </div>
 </template>
 
