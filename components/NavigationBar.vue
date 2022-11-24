@@ -8,7 +8,6 @@ import { useCartStore } from '@/store/cart'
 const cartStore = useCartStore();
 const router = useRouter()
 const query = ref('');
-const visible = ref(false)
 
 function navigateToSearch() {
   router.push({ path: '/search', query: { q: query.value } })
@@ -29,16 +28,16 @@ const formattedWeight = computed(() => {
 <template>
   <el-menu class="navigation-menu" mode="horizontal" ellipsis router>
       <div class="flex items-center justify-center px-3 cursor-pointer">
-        <NuxtLink to =/><span class="whitespace-nowrap text-2xl font-bold text-pg-primary">OFS Farms</span></NuxtLink>
-          <el-button color="#14aeff" @click="visible = true" class="absolute right-5">
-            <el-badge :value="cartStore.itemCount" class="item">
-          <el-icon class="el-icon--center" :size="28" color="white">
-            <ShoppingCart />
-          </el-icon>
+        <NuxtLink to ="/"><span class="whitespace-nowrap text-2xl font-bold text-pg-primary">OFS Farms</span></NuxtLink>
+        <el-button color="#14aeff" @click="cartStore.toggleVisibility" class="absolute right-5">
+          <el-badge :value="cartStore.itemCount" class="item">
+            <el-icon class="el-icon--center" :size="28" color="white">
+              <ShoppingCart />
+            </el-icon>
           </el-badge>
         </el-button>
         <client-only>
-          <el-drawer v-model="visible" :show-close="false">
+          <el-drawer v-model="cartStore.visible" :show-close="false">
            <template #header="{ close, titleId, titleClass }">
               <b :id="titleId" :class="titleClass">ProduceGoose Cart </b>
               <b :id="titleId" :class="titleClass"> Price: {{formattedPrice}} </b>

@@ -2,6 +2,7 @@
 import { ElButton, ElPageHeader } from 'element-plus'
 import { ArrowRightBold } from '@element-plus/icons-vue'
 import { usePageHeaderStore } from '@/store/pageHeader'
+import { useCartStore } from '@/store/cart'
 
 const pageHeaderStore = usePageHeaderStore();
 

@@ -17,6 +17,7 @@ export const useCartStore = defineStore('cartStore', () => {
   const userStore = useUserStore()
   const displaySignupPrompt = ref(false);
   const displayOutOfStock = ref(false);
+  const visible = ref(false)
 
   let pendingProduct = null;
   let firstItemAdded = true;
@@ -145,5 +146,7 @@ export const useCartStore = defineStore('cartStore', () => {
     displayOutOfStock,
     continueWithoutLogin,
     fetchCart,
+    visible,
+    toggleVisibility: () => visible.value = !visible.value,
   }
 })
