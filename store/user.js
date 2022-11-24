@@ -21,8 +21,11 @@ export const useUserStore = defineStore('user', () => {
     }
     
     const sessionCookie = useCookie('session')
-    if (sessionCookie.value) {
+    
+    if (sessionCookie.value !== undefined && sessionCookie.value !== '') {
         setWithUserToken(sessionCookie.value)
+    } else {
+        user.value = null
     }
 
     const setupLoginNotification = (message) => {
