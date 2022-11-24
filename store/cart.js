@@ -55,7 +55,6 @@ export const useCartStore = defineStore('cartStore', () => {
     }
     
     if (!userStore.isLoggedIn && firstItemAdded) {
-      firstItemAdded = false;
       pendingProduct = product;
       displaySignupPrompt.value = true;
       return;
@@ -82,11 +81,6 @@ export const useCartStore = defineStore('cartStore', () => {
     } else {
       update(existingItem, existingItem.quantity + 1);
     }
-  }
-
-  const continueWithoutLogin = () => {
-    displaySignupPrompt.value = false;
-    add(pendingProduct);
   }
 
   const update = async (item, newQuantity) => {
@@ -144,7 +138,6 @@ export const useCartStore = defineStore('cartStore', () => {
     totalPrice,
     displaySignupPrompt,
     displayOutOfStock,
-    continueWithoutLogin,
     fetchCart,
     visible,
     toggleVisibility: () => visible.value = !visible.value,
