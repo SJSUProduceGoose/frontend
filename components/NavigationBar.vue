@@ -1,5 +1,5 @@
 <script setup>
-import { ElButton, ElInput, ElIcon, ElMenu, ElMenuItem, ElDrawer } from 'element-plus'
+import { ElButton, ElInput, ElIcon, ElMenu, ElMenuItem, ElDrawer, ElBadge } from 'element-plus'
 import { Search, ShoppingCart } from '@element-plus/icons-vue'
 import { useUserStore } from "@/store/user";
 import { ref } from 'vue'
@@ -29,12 +29,14 @@ const formattedWeight = computed(() => {
 <template>
   <el-menu class="navigation-menu" mode="horizontal" ellipsis router>
       <div class="flex items-center justify-center px-3 cursor-pointer">
-        <span class="whitespace-nowrap text-2xl font-bold text-pg-primary">OFS Farms</span>
-        <b class="absolute right-22 text-base"> {{ cartStore.itemCount }} items in cart</b>
+        <NuxtLink to =/><span class="whitespace-nowrap text-2xl font-bold text-pg-primary">OFS Farms</span></NuxtLink>
+       
         <el-button color="#14aeff" @click="visible = true" class="absolute right-5">
+          <el-badge :value="cartStore.itemCount" class="item">
           <el-icon class="el-icon--center" :size="28" color="white">
             <ShoppingCart />
           </el-icon>
+          </el-badge>
         </el-button>
         <client-only>
           <el-drawer v-model="visible" :show-close="false">
@@ -63,8 +65,9 @@ const formattedWeight = computed(() => {
     <template v-else>
       <el-menu-item index="/account">Account</el-menu-item>
       <el-menu-item index="/orders">Orders</el-menu-item>
+      <el-menu-item index="/employee">Employee</el-menu-item>
     </template>
-
+    
     <div style="display: flex; align-items: center;padding: 0 1rem;">
       <div>
         <el-input style="max-width: px;" v-model="query" placeholder="Search">
