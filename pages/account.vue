@@ -1,20 +1,11 @@
 <script setup>
-import { ElNotification as notify, ElButton, ElPageHeader, ElDescriptionsItem, ElDescriptions, ElAvatar, ElTag } from 'element-plus'
-
-const config = useRuntimeConfig()
+import { ElPageHeader, ElDescriptionsItem, ElDescriptions, ElAvatar, ElTag } from 'element-plus'
 
 definePageMeta({
   middleware: ['auth-customer']
 })
 
-const { data } = await useFetch('/user/me/', {
-  baseURL: config.public.BASE_URL,
-  headers: {
-    cookie: `session=${useCookie('session').value};`,
-  },
-})
-
-console.log(data)
+const { data } = await useApi('/user/me/')
 
 </script>
   

@@ -23,7 +23,7 @@ async function onSubmit(e) {
   formData.append('password', form.password)
 
   try {
-    const response = await useApi('/auth/token/', {
+    const response = await $api('/auth/token/', {
       method: 'POST',
       body: formData
     })

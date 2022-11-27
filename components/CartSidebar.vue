@@ -25,7 +25,7 @@ const isFreeShipping = computed(() => {
 })
 
 async function onCheckout() {
-  const response = await useApi('/cart/checkout/', {
+  const response = await $api('/cart/checkout/', {
     method: 'POST',
   })
 

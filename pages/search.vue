@@ -1,38 +1,32 @@
 <script setup>
 const route = useRoute()
-// const router = useRouter()
-
-const config = useRuntimeConfig();
 
 const items = ref([])
+
 // router.afterEach(async () => {
-//   const { data } = await useFetch(`/search/?q=${route.query.q}`, {
+//   const { data } = await useApi(`/search/?q=${route.query.q}`, {
     
 //     key: `search:${route.query.q}`,
-//     baseURL: config.public.BASE_URL,
 // })
 // console.log(data)
 //     items.value = data.value.items
 // })
 
 // watchEffect(route.query, async () => {
-//   const { data } = await useFetch(`/search/?q=${route.query.q}`, {
+//   const { data } = await useApi(`/search/?q=${route.query.q}`, {
     
 //     key: `search:${route.query.q}`,
-//     baseURL: config.public.BASE_URL,
 // })
 // console.log(data)
 //     items.value = data.value.items
 // })
 
 
-const { data } = await useFetch(`/search/?q=${route.query.q}`, {
-    
-        key: `search:${route.query.q}`,
-        baseURL: config.public.BASE_URL,
-    })
-    console.log(route)
-        items.value = data.value.items
+const { data } = await useApi(`/search/?q=${route.query.q}`, {
+    key: `search:${route.query.q}`,
+})
+
+items.value = data.value.items
 
 
 </script>

@@ -36,7 +36,7 @@ async function onSubmit(e: Event) {
 
     try {
       // TODO: verify the endpoint url
-      const response: any = await useApi('/auth/register/', {
+      const response: any = await $api('/auth/register/', {
         method: 'POST',
         body: formData
       })

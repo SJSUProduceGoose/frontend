@@ -4,19 +4,13 @@ import { Plus } from '@element-plus/icons-vue'
 import { usePageHeaderStore } from '@/store/pageHeader'
 import { useCartStore } from '@/store/cart'
 
-
 const cartStore = useCartStore();
-
 const pageHeaderStore = usePageHeaderStore()
 
-
-const config = useRuntimeConfig();
 const route = useRoute()
-const { data } = await useFetch(`/category/${route.params.slug}?expand=products`, {
+const { data } = await useApi(`/category/${route.params.slug}?expand=products`, {
   key: `category:${route.params.slug}`,
-  baseURL: config.public.BASE_URL,
 })
-
 
 pageHeaderStore.setOptions({
   title: data.value.name

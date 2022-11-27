@@ -16,26 +16,19 @@ let category = null
 const show = ref(true)
 
 const productResponse = async () => {
-  console.log(value.value)
-  category = await useFetch(`/category/${value.value}?expand=products`, {
-    baseURL: config.public.BASE_URL,
+  category = await useApi(`/category/${value.value}?expand=products`, {
     key: `category:${value.value}`
-    
   })
   products.value = category.data.value.products
 
   show.value = false
 }
 
-const config = useRuntimeConfig()
-
-const { data } = await useFetch('/category/', {
-  baseURL: config.public.BASE_URL,
-})
+const { data } = await useApi('/category/')
 
 async function updateProduct(product) {
   product.loading = true;
-  const response = await useApi(`/product/${product.id}`, {
+  await $api(`/product/${product.id}`, {
     method: 'PATCH',
     body: {
       quantity: product.quantity,
@@ -45,17 +38,15 @@ async function updateProduct(product) {
   product.loading = false;
   category.refresh() 
 }
-
-
-
 </script>
   
 <template>
   <div>
-    <el-select v-model="value" @change="productResponse()" class="m-2" placeholder="Select Category" size="large">
-      <el-option v-for="item in data.items" :key="item.id" :label="item.name" :value="item.slug" />
-
-    </el-select>
+    <ClientOnly>
+      <el-select v-model="value" @change="productResponse()" class="m-2" placeholder="Select Category" size="large">
+        <el-option v-for="item in data.items" :key="item.id" :label="item.name" :value="item.slug" />
+      </el-select>
+    </ClientOnly>
 
     <div v-if="show" class="flex">
       <img id="goose" src="~/assets/img/produce-goose.png" alt="Produce Goose" class="w-150 h-150 mt-25 ml-40">
