@@ -2,6 +2,13 @@
 import { ElSelect, ElOption, ElButton, ElIcon, ElInputNumber } from 'element-plus';
 import { Plus } from '@element-plus/icons-vue'
 import { ref } from 'vue'
+
+definePageMeta({
+  middleware: ['auth-employee']
+})
+
+
+
 const value = ref('')
 
 const products = ref([])

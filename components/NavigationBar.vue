@@ -5,25 +5,15 @@ import { useUserStore } from "@/store/user";
 import { ref } from 'vue'
 import { useCartStore } from '@/store/cart'
 
-
-
-
 const cartStore = useCartStore();
 const router = useRouter()
-
+const query = ref('');
 const visible = ref(false)
 
-
-const query = ref('');
-  function navigateToSearch() {
-
+function navigateToSearch() {
   router.push({ path: '/search', query: { q: query.value } })
-
+  // const { items } = await $fetch(`https://produce-goose-backend-stg.herokuapp.com/search/?q=${input.value}`)
 }
-
-
-
-
 
 const userStore = useUserStore()
 
@@ -38,36 +28,35 @@ const formattedWeight = computed(() => {
 
 <template>
   <el-menu class="navigation-menu" mode="horizontal" ellipsis router>
-    <div class="flex items-center justify-center px-3 cursor-pointer">
-      <NuxtLink to= /><span class="whitespace-nowrap text-2xl font-bold text-pg-primary">OFS Farms</span></NuxtLink>
-
-      <el-button color="#14aeff" @click="visible = true" class="absolute right-5">
-        <el-badge :value="cartStore.itemCount" class="item">
+      <div class="flex items-center justify-center px-3 cursor-pointer">
+        <NuxtLink to =/><span class="whitespace-nowrap text-2xl font-bold text-pg-primary">OFS Farms</span></NuxtLink>
+          <el-button color="#14aeff" @click="visible = true" class="absolute right-5">
+            <el-badge :value="cartStore.itemCount" class="item">
           <el-icon class="el-icon--center" :size="28" color="white">
             <ShoppingCart />
           </el-icon>
-        </el-badge>
-      </el-button>
-      <client-only>
-        <el-drawer v-model="visible" :show-close="false">
-          <template #header="{ close, titleId, titleClass }">
-            <b :id="titleId" :class="titleClass">ProduceGoose Cart </b>
-            <b :id="titleId" :class="titleClass"> Price: {{ formattedPrice }} </b>
-            <b :id="titleId" :class="titleClass"> Weight: {{ formattedWeight }} </b>
-            <NuxtLink to="/checkout">
-              <el-button type="danger">
-                Checkout
-              </el-button>
-            </NuxtLink>
-          </template>
-          <Cart :objects="cartStore.items">
-            <template v-slot="{ product, item }">
-              <CartItem :product="product" :item="item" />
+          </el-badge>
+        </el-button>
+        <client-only>
+          <el-drawer v-model="visible" :show-close="false">
+           <template #header="{ close, titleId, titleClass }">
+              <b :id="titleId" :class="titleClass">ProduceGoose Cart </b>
+              <b :id="titleId" :class="titleClass"> Price: {{formattedPrice}} </b>
+              <b :id="titleId" :class="titleClass"> Weight: {{formattedWeight}} </b>
+              <NuxtLink to="/checkout">
+                <el-button type="danger">
+                  Checkout
+                </el-button>
+              </NuxtLink>
             </template>
-          </Cart>
-        </el-drawer>
-      </client-only>
-    </div>
+           <Cart :objects="cartStore.items">
+              <template v-slot="{ product, item }">
+                <CartItem :product="product" :item="item" />
+              </template>
+            </Cart>
+          </el-drawer>
+        </client-only>
+      </div>
     <el-menu-item index="/shop">Shop</el-menu-item>
     <template v-if="userStore.user === null">
       <el-menu-item index="/login">Login</el-menu-item>
@@ -75,9 +64,8 @@ const formattedWeight = computed(() => {
     <template v-else>
       <el-menu-item index="/account">Account</el-menu-item>
       <el-menu-item index="/orders">Orders</el-menu-item>
-      <el-menu-item index="/employee">Employee</el-menu-item>
+      <el-menu-item v-if="userStore.user.is_employee || userStore.user.is_superuser" index="/employee">Employee</el-menu-item>
     </template>
-
     <div style="display: flex; align-items: center;padding: 0 1rem;">
       <div>
         <el-input style="max-width: px;" v-model="query" placeholder="Search">
@@ -96,7 +84,6 @@ const formattedWeight = computed(() => {
         </el-input>
       </div>
     </div>
-
   </el-menu>
 </template>
 
