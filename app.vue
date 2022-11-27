@@ -1,6 +1,7 @@
 <script setup>
 import { ID_INJECTION_KEY, ElDialog, ElButton } from 'element-plus'
 import { useCartStore } from "@/store/cart";
+import CartSidebar from "@/components/CartSidebar";
 
 provide(ID_INJECTION_KEY, {
   prefix: 100,
@@ -16,7 +17,6 @@ function chooseLogin(navigate) {
 
 function continueWithoutLogin(callback) {
   cartStore.displaySignupPrompt = false
-  cartStore.continueWithoutLogin()
 }
 
 cartStore.fetchCart();
@@ -30,7 +30,7 @@ cartStore.fetchCart();
         v-model="cartStore.displaySignupPrompt"
         title="Join us!"
       >
-        <span>Login to store your cart items between reloads and reserve your stock for a smoother check out experience.</span>
+        <span>Login to add and reserve items in your cart for a smooth checkout experience.</span>
         <template #footer>
           <span class="dialog-footer">
             <el-button @click="continueWithoutLogin">Later</el-button>
@@ -52,6 +52,7 @@ cartStore.fetchCart();
       <PageHeader/>
       <NuxtPage/>
     </div>
+    <CartSidebar/>
   </div>
 </template>
 
