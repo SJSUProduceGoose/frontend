@@ -6,5 +6,11 @@ export default {
         'pg-secondary': '#1BACFF',
       }
     }
+  },
+  corePlugins: {
+    preflight: false,
+  },
+  tailwindcss: {
+    viewer: false
   }
 }

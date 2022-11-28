@@ -5,7 +5,7 @@ export default defineNuxtConfig({
   buildModules: ['@pinia/nuxt'],
   runtimeConfig: {
       public: {
-          BASE_URL: 'http://localhost:8080',
+          BASE_URL: 'http://localhost:8080/api',
       },
   },
   // meta
@@ -15,6 +15,11 @@ export default defineNuxtConfig({
       // {
       //   rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'
       // }
+      // ensure the the preflight is loaded before the main css
+      { 
+        rel: "prefetch stylesheet",
+        href: "https://unpkg.com/tailwindcss@3.2.4/src/css/preflight.css",
+      }
     ],
     title: 'Produce Goose',
     meta: [
@@ -28,7 +33,9 @@ export default defineNuxtConfig({
   },
 
   // css
-  css: ['~/assets/scss/index.scss'],
+  css: [
+    '~/assets/scss/index.scss',
+  ],
 
   // build
   build: {
