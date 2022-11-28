@@ -1,21 +1,19 @@
 <script setup>
-import { ElPopover, ElProgress, ElBadge, ElButton, ElInput, ElIcon, ElMenu, ElMenuItem, ElDrawer } from 'element-plus'
+import { ElBadge, ElButton, ElInput, ElIcon, ElMenu, ElMenuItem } from 'element-plus'
 import { Search, ShoppingCart } from '@element-plus/icons-vue'
 import { useUserStore } from "@/store/user";
-import { ref } from 'vue'
 import { useCartStore } from '@/store/cart'
 
+const route = useRoute()
+
 const cartStore = useCartStore();
-const router = useRouter()
-const query = ref('');
-
-function navigateToSearch() {
-  router.push({ path: '/search', query: { q: query.value } })
-  // const { items } = await $fetch(`https://produce-goose-backend-stg.herokuapp.com/search/?q=${input.value}`)
-}
-
 const userStore = useUserStore()
 
+const query = ref(route.query.q || ''); 
+
+function navigateToSearch() {
+  navigateTo({ path: '/search', query: { q: query.value } })
+}
 </script>
 
 <template>

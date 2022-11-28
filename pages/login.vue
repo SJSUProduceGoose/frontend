@@ -23,7 +23,7 @@ async function onSubmit(e) {
   formData.append('password', form.password)
 
   try {
-    const response = await useApi('/auth/token/', {
+    const response = await $api('/auth/token/', {
       method: 'POST',
       body: formData
     })
@@ -43,33 +43,35 @@ if (process.client && userStore.loginNofification !== null) {
 </script>
 
 <template>
-  <div class="auth-container">
-    <el-form :model="form" label-width="90px" class="card auth-form-card">
-      <h3 class="mb-4">Login</h3>
-      <el-form-item label="Username">
-        <el-input v-model="form.username"/>
-      </el-form-item>
-      <el-form-item label="Password">
-        <el-input v-model="form.password" type="password" autocomplete="off" />
-      </el-form-item>
-      <el-form-item>
-        <el-alert
-          v-if="showError"
-          type="error"
-          title="Login Error"
-          :description="errorText"
-          show-icon
-          :closable="false"
-        />
-      </el-form-item>
-      <el-form-item>
-        <div style="justify-content: space-between;width:100%;display: flex;align-items: center;">
-          <el-button type="primary" @click="onSubmit">Submit</el-button>
-          <router-link custom to="/register" v-slot="{ navigate, href }">
-            <el-link type="info" :href="href" @click="navigate" style="line-height: initial;">Register</el-link>
-          </router-link>
-        </div>
-      </el-form-item>
-    </el-form>
+  <div class="content px-4">
+    <div class="auth-container">
+      <el-form :model="form" label-width="90px" class="card auth-form-card">
+        <h3 class="mb-4">Login</h3>
+        <el-form-item label="Username">
+          <el-input v-model="form.username"/>
+        </el-form-item>
+        <el-form-item label="Password">
+          <el-input v-model="form.password" type="password" autocomplete="off" />
+        </el-form-item>
+        <el-form-item>
+          <el-alert
+            v-if="showError"
+            type="error"
+            title="Login Error"
+            :description="errorText"
+            show-icon
+            :closable="false"
+          />
+        </el-form-item>
+        <el-form-item>
+          <div style="justify-content: space-between;width:100%;display: flex;align-items: center;">
+            <el-button type="primary" @click="onSubmit">Submit</el-button>
+            <router-link custom to="/register" v-slot="{ navigate, href }">
+              <el-link type="info" :href="href" @click="navigate" style="line-height: initial;">Register</el-link>
+            </router-link>
+          </div>
+        </el-form-item>
+      </el-form>
+    </div>
   </div>
 </template>

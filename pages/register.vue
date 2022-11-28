@@ -36,7 +36,7 @@ async function onSubmit(e: Event) {
 
     try {
       // TODO: verify the endpoint url
-      const response: any = await useApi('/auth/register/', {
+      const response: any = await $api('/auth/register/', {
         method: 'POST',
         body: formData
       })
@@ -100,53 +100,55 @@ const rules = reactive({
 </script>
 
 <template>
-  <div class="auth-container">
-    <el-form
-    class="card auth-form-card"
-    ref="formRef"
-    :model="form"
-    status-icon
-    :rules="rules"
-    label-width="90px"
-  >
-    <h3 class="mb-4">Register</h3>
-    <el-form-item label="First name" prop="firstname">
-      <el-input v-model="form.firstname"/>
-    </el-form-item>
-    <el-form-item label="Last name" prop="lastname">
-      <el-input v-model="form.lastname"/>
-    </el-form-item>
-    <el-form-item label="Email" prop="username">
-      <el-input v-model="form.username"/>
-    </el-form-item>
-    <el-form-item label="Password" prop="password">
-      <el-input v-model="form.password" type="password" autocomplete="off" />
-    </el-form-item>
-    <el-form-item label="Confirm" prop="confirmPassword">
-      <el-input
-        v-model="form.confirmPassword"
-        type="password"
-        autocomplete="off"
-      />
-    </el-form-item>
-    <el-form-item>
-        <el-alert
-          v-if="showError"
-          type="error"
-          title="Registration Error"
-          :description="errorText"
-          show-icon
-          :closable="false"
+  <div class="content px-4">
+    <div class="auth-container">
+      <el-form
+      class="card auth-form-card"
+      ref="formRef"
+      :model="form"
+      status-icon
+      :rules="rules"
+      label-width="90px"
+    >
+      <h3 class="mb-4">Register</h3>
+      <el-form-item label="First name" prop="firstname">
+        <el-input v-model="form.firstname"/>
+      </el-form-item>
+      <el-form-item label="Last name" prop="lastname">
+        <el-input v-model="form.lastname"/>
+      </el-form-item>
+      <el-form-item label="Email" prop="username">
+        <el-input v-model="form.username"/>
+      </el-form-item>
+      <el-form-item label="Password" prop="password">
+        <el-input v-model="form.password" type="password" autocomplete="off" />
+      </el-form-item>
+      <el-form-item label="Confirm" prop="confirmPassword">
+        <el-input
+          v-model="form.confirmPassword"
+          type="password"
+          autocomplete="off"
         />
       </el-form-item>
-    <el-form-item>
-      <div style="justify-content: space-between;width:100%;display: flex;align-items: center;">
-          <el-button type="primary" @click="onSubmit">Submit</el-button>
-          <router-link custom to="/login" v-slot="{ navigate, href }">
-            <el-link type="info" :href="href" @click="navigate" style="line-height: initial;">Login</el-link>
-          </router-link>
-        </div>
-    </el-form-item>
-  </el-form>
+      <el-form-item>
+          <el-alert
+            v-if="showError"
+            type="error"
+            title="Registration Error"
+            :description="errorText"
+            show-icon
+            :closable="false"
+          />
+        </el-form-item>
+      <el-form-item>
+        <div style="justify-content: space-between;width:100%;display: flex;align-items: center;">
+            <el-button type="primary" @click="onSubmit">Submit</el-button>
+            <router-link custom to="/login" v-slot="{ navigate, href }">
+              <el-link type="info" :href="href" @click="navigate" style="line-height: initial;">Login</el-link>
+            </router-link>
+          </div>
+      </el-form-item>
+    </el-form>
+    </div>
   </div>
 </template>

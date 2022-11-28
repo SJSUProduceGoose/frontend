@@ -64,7 +64,7 @@ export const useCartStore = defineStore('cartStore', () => {
 
     if (existingItem === undefined) {
       if (userStore.isLoggedIn) {
-        const response = await useApi('/cart/', {
+        const response = await $api('/cart/', {
           method: 'POST',
           body: {
             product_id: product.id,
@@ -87,7 +87,7 @@ export const useCartStore = defineStore('cartStore', () => {
     const existingItem = findByItem(item)
 
     if (userStore.isLoggedIn) {
-        const response = await useApi(`/cart/${existingItem.id}`, {
+        const response = await $api(`/cart/${existingItem.id}`, {
           method: 'PATCH',
           body: {
             quantity: newQuantity,
@@ -106,7 +106,7 @@ export const useCartStore = defineStore('cartStore', () => {
     const existingItem = findByItem(item)
 
     if (userStore.isLoggedIn) {
-      await useApi(`/cart/${existingItem.id}`, {
+      await $api(`/cart/${existingItem.id}`, {
         method: 'DELETE',
       })
     }
@@ -115,14 +115,7 @@ export const useCartStore = defineStore('cartStore', () => {
   }
 
   const fetchCart = async () => {
-    const config = useRuntimeConfig();
-    fetchCartResponse = await useFetch('/cart/', {
-      baseURL: config.public.BASE_URL,
-      headers: {
-        cookie: `session=${useCookie('session').value};`,
-      },
-
-    })
+    fetchCartResponse = await useApi('/cart/')
     if (fetchCartResponse.error.value == null) {
       store.value = fetchCartResponse.data.value
     }
@@ -141,5 +134,10 @@ export const useCartStore = defineStore('cartStore', () => {
     fetchCart,
     visible,
     toggleVisibility: () => visible.value = !visible.value,
+    refresh: () => {
+      if (fetchCartResponse) {
+        fetchCartResponse.refresh()
+      }
+    },
   }
 })

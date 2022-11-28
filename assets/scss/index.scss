@@ -12,9 +12,11 @@ html, body {
   margin: 0;
 }
 
-// body {
-//   padding-top: 59px; // the height of the navbar
-// }
+.content {
+  /* 60.5px is the height of the header */
+  height: calc(100vh);
+  padding-top: 59px;
+}
 
 .auth-container {
   display: flex;

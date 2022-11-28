@@ -4,15 +4,17 @@ import { ElButton } from 'element-plus'
 </script>
 
 <template>
-  <div id="wrapper">
-    <img id="goose" src="~/assets/img/produce-goose.png" alt="Produce Goose">
+  <div class="content px-4">
+    <div id="wrapper">
+      <img id="goose" src="~/assets/img/produce-goose.png" alt="Produce Goose">
 
-    <div id="text">
-      <h1>Fresh! Local! Fun!</h1>
-      <h2>Order fresh produce from the comfort of your own home from local, organic farms with a few clicks!</h2>
-      <NuxtLink custom to="/shop" v-slot="{ navigate }">
-        <el-button type="primary" class="action-button" @click="navigate">Shop Now</el-button>
-      </NuxtLink>
+      <div id="text">
+        <h1>Fresh! Local! Fun!</h1>
+        <h2>Order fresh produce from the comfort of your own home from local, organic farms with a few clicks!</h2>
+        <NuxtLink custom to="/shop" v-slot="{ navigate }">
+          <el-button type="primary" class="action-button" @click="navigate">Shop Now</el-button>
+        </NuxtLink>
+      </div>
     </div>
   </div>
 </template>
