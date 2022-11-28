@@ -3,7 +3,6 @@ import { ElCard } from 'element-plus'
 
 const props = defineProps({
   objects: Array,
-  poop: String
 
 })
 </script>
