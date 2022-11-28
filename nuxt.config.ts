@@ -4,6 +4,7 @@ import ElementPlus from 'unplugin-element-plus/vite'
 export default defineNuxtConfig({
   buildModules: ['@pinia/nuxt'],
   runtimeConfig: {
+      BASE_URL: 'http://localhost:8080/api',
       public: {
           BASE_URL: 'http://localhost:8080/api',
       },
