@@ -5,28 +5,29 @@ export const useApi = async (path, options={}) => {
   const userStore = useUserStore();
   const headers = useRequestHeaders(['cookie'])
 
-  try {
-    return await useFetch(path, {
-      baseURL: config.public.BASE_URL,
-      headers: {
-        ...headers,
-        ...(options.headers || {}),
-      },
-      key: path,
-      ...options,
-    })
-  } catch (error) {
-    console.error(error);
+  const response = await useFetch(path, {
+    baseURL: config.public.BASE_URL,
+    headers: {
+      ...headers,
+      ...(options.headers || {}),
+    },
+    key: path,
+    ...options,
+  })
+
+  if (response.error.value) {
+    // TODO: Handle errors beter here
+    const error = response.error.value;
     if (error.response.status === 401) {
-      userStore.setupLoginNotification({
-        type: 'error',
-        title: 'Error',
-        message: error.data.detail,
-        durration: 2000,
-      });
-      navigateTo('/login')
-    }
-    throw error
+    userStore.setupLoginNotification({
+      type: 'error',
+      title: 'Error',
+      message: error.data.detail,
+      durration: 2000,
+    });
   }
-  
+  }
+
+  return response
+
 }

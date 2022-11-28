@@ -134,5 +134,10 @@ export const useCartStore = defineStore('cartStore', () => {
     fetchCart,
     visible,
     toggleVisibility: () => visible.value = !visible.value,
+    refresh: () => {
+      if (fetchCartResponse) {
+        fetchCartResponse.refresh()
+      }
+    },
   }
 })
