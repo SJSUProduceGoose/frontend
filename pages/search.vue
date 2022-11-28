@@ -1,6 +1,10 @@
 <script setup>
 const route = useRoute()
 
+definePageMeta({
+  key: (route) => route.fullPath,
+})
+
 const items = ref([])
 
 // router.afterEach(async () => {
@@ -25,6 +29,8 @@ const items = ref([])
 const { data } = await useApi(`/search/?q=${route.query.q}`, {
     key: `search:${route.query.q}`,
 })
+
+console.log(data.value.items);
 
 items.value = data.value.items
 
