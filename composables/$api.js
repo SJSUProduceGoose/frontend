@@ -7,7 +7,7 @@ export const $api = async (path, options) => {
 
   try {
     return await $fetch(`${config.public.BASE_URL}${path}`, {
-      baseURL: config.public.BASE_URL,
+      baseURL: config.BASE_URL || config.public.BASE_URL,
       headers: {
         ...headers,
         ...(options.headers || {}),
