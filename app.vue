@@ -48,18 +48,7 @@ cartStore.fetchCart();
       </el-dialog>
     </ClientOnly>
     <NavigationBar/>
-    <div class="content px-4">
-      <PageHeader/>
-      <NuxtPage/>
-    </div>
+    <NuxtPage/>
     <CartSidebar/>
   </div>
 </template>
-
-<style scoped>
-.content {
-  /* 60.5px is the height of the header */
-  height: calc(100vh);
-  padding-top: 59px;
-}
-</style>
