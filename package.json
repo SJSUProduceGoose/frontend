@@ -9,6 +9,7 @@
     "start": "node .output/server/index.mjs"
   },
   "devDependencies": {
+    "@vue-leaflet/vue-leaflet": "^0.6.1",
     "@vueuse/core": "^9.3.0",
     "nuxt": "3.0.0-rc.11",
     "sass": "^1.55.0",
@@ -21,6 +22,7 @@
     "@unocss/nuxt": "^0.45.29",
     "@vueuse/nuxt": "^9.3.0",
     "element-plus": "^2.2.17",
+    "leaflet": "^1.9.3",
     "pinia": "^2.0.23"
   }
 }
