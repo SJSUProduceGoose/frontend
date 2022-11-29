@@ -22,6 +22,7 @@
     "@unocss/nuxt": "^0.45.29",
     "@vueuse/nuxt": "^9.3.0",
     "element-plus": "^2.2.17",
+    "esbuild-windows-64": "^0.15.16",
     "leaflet": "^1.9.3",
     "pinia": "^2.0.23"
   }
