@@ -1,6 +1,8 @@
 <script setup>
 import { ElPageHeader, ElDescriptionsItem, ElDescriptions, ElAvatar, ElTag } from 'element-plus'
 
+const router = useRoute()
+
 definePageMeta({
   middleware: ['auth-customer']
 })

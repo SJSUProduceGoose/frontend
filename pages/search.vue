@@ -1,4 +1,9 @@
 <script setup>
+import { ElButton } from 'element-plus'
+import { Plus } from '@element-plus/icons-vue'
+import { useCartStore } from '@/store/cart'
+
+const cartStore = useCartStore();
 const route = useRoute()
 
 definePageMeta({
@@ -12,15 +17,13 @@ const { data } = await useApi(`/search/?q=${route.query.q}`, {
 })
 
 items.value = data.value.items
-
 </script>
 
 <template>
-
   <div class="content px-4">
     <CardGrid :objects="items">
       <template v-slot="{ object }">
-        <div class="relative flex justify-between items-end ">
+        <div class="relative flex justify-between items-end">
           <div>
             <div class="text-2xl">
               {{ object.name }}
@@ -31,16 +34,11 @@ items.value = data.value.items
             <div class="flex mt-2">
             </div>
           </div>
-
           <div class="absolute bottom-0 right-0">
-
-
+            <el-button circle @click="cartStore.add(object)" :icon="Plus" type="primary"></el-button>
           </div>
         </div>
       </template>
     </CardGrid>
-
-  </div>
-
+   </div>
 </template>
-
