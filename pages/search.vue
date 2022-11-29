@@ -1,4 +1,9 @@
 <script setup>
+import { ElButton } from 'element-plus'
+import { Plus } from '@element-plus/icons-vue'
+import { useCartStore } from '@/store/cart'
+
+const cartStore = useCartStore();
 const route = useRoute()
 
 definePageMeta({
@@ -9,7 +14,7 @@ const items = ref([])
 
 // router.afterEach(async () => {
 //   const { data } = await useApi(`/search/?q=${route.query.q}`, {
-    
+
 //     key: `search:${route.query.q}`,
 // })
 // console.log(data)
@@ -18,7 +23,7 @@ const items = ref([])
 
 // watchEffect(route.query, async () => {
 //   const { data } = await useApi(`/search/?q=${route.query.q}`, {
-    
+
 //     key: `search:${route.query.q}`,
 // })
 // console.log(data)
@@ -27,7 +32,7 @@ const items = ref([])
 
 
 const { data } = await useApi(`/search/?q=${route.query.q}`, {
-    key: `search:${route.query.q}`,
+  key: `search:${route.query.q}`,
 })
 
 console.log(data.value.items);
@@ -41,7 +46,7 @@ items.value = data.value.items
 <template>
 
 
-<CardGrid :objects="items">
+  <CardGrid :objects="items">
     <template v-slot="{ object }">
       <div class="relative flex justify-between items-end">
         <div>
@@ -53,12 +58,12 @@ items.value = data.value.items
           </div>
           <div class="flex mt-2">
           </div>
-          </div>
-          <div class="absolute bottom-0 right-0">
-
-         
-          </div>
         </div>
+        <div class="absolute bottom-0 right-0">
+
+          <el-button circle @click="cartStore.add(object)" :icon="Plus" type="primary"></el-button>
+        </div>
+      </div>
     </template>
   </CardGrid>
 
