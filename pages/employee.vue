@@ -50,8 +50,8 @@ async function updateProduct(product) {
       </ClientOnly>
 
       <div v-if="show" class="flex">
-        <img id="goose" src="~/assets/img/produce-goose.png" alt="Produce Goose" class="w-150 h-150 mt-25 ml-40">
-        <b class="mt-65 font-sans text-pg-primary">Welcome!
+        <img id="goose" src="~/assets/img/produce-goose.png" alt="Produce Goose" class="w-150 h-150 mt-25 ml-90">
+        <b class="mt-65 font-sans text-pg-primary text-2xl">Welcome!
           <br>
           Choose a category to start :)
         </b>
