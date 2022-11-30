@@ -104,10 +104,11 @@ const activities = [
                 </el-timeline-item>
               </el-timeline>
             </div>
-            <div class="w-full h-60 pl-4 flex flex-col items-center justify-center">
+            <div class="w-full h-60 pl-4 flex flex-col items-center justify-center z-1">
               <ClientOnly v-if="renderMap">
                 <l-map 
                   class="w-full h-full"
+                  :options="{zoomControl: false}"
                   :zoom="zoom"
                   :center="center"
                 >
