@@ -7,6 +7,7 @@ export const $api = async (path, options) => {
 
   try {
     return await $fetch(path, {
+      credentials: 'include',
       baseURL: config.BASE_URL || config.public.BASE_URL,
       headers: {
         ...headers,
