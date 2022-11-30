@@ -123,7 +123,7 @@ const rules = reactive({
       <el-form-item label="Password" prop="password">
         <el-input v-model="form.password" type="password" autocomplete="off" />
       </el-form-item>
-      <el-form-item label="Confirm" prop="confirmPassword">
+      <el-form-item label="Confirm Password" prop="confirmPassword">
         <el-input
           v-model="form.confirmPassword"
           type="password"
