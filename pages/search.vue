@@ -16,13 +16,9 @@ const { data } = await useApi(`/search/?q=${route.query.q}`, {
   key: `search:${route.query.q}`,
 })
 
-
-
-
 items.value = data.value.items
 
 const isEmpty = computed(() => {
-  console.log(items.value.length == 0)
   return items.value.length == 0
 })
 </script>

@@ -6,6 +6,7 @@ export const useApi = async (path, options={}) => {
   const headers = useRequestHeaders(['cookie'])
 
   const response = await useFetch(path, {
+    credentials: 'include',
     baseURL: config.BASE_URL || config.public.BASE_URL,
     headers: {
       ...headers,

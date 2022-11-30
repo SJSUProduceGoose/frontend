@@ -43,7 +43,7 @@ export const useCartStore = defineStore('cartStore', () => {
         add(pendingProduct)
         pendingProduct = null
       }
-      await fetchCartResponse.refresh();
+      await refresh();
       fetchCart();
     }
   });
@@ -121,6 +121,12 @@ export const useCartStore = defineStore('cartStore', () => {
     }
   }
 
+  const refresh = async () => {
+    if (fetchCartResponse !== null) {
+      await fetchCartResponse.refresh()
+    }
+  }
+
   return {
     add,
     items: computed(() => store.value.items),
@@ -134,10 +140,6 @@ export const useCartStore = defineStore('cartStore', () => {
     fetchCart,
     visible,
     toggleVisibility: () => visible.value = !visible.value,
-    refresh: () => {
-      if (fetchCartResponse) {
-        fetchCartResponse.refresh()
-      }
-    },
+    refresh
   }
 })
