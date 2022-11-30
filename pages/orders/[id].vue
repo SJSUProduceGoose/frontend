@@ -108,6 +108,7 @@ const activities = [
               <ClientOnly v-if="renderMap">
                 <l-map 
                   class="w-full h-full"
+                  :options="{zoomControl: false}"
                   :zoom="zoom"
                   :center="center"
                 >
