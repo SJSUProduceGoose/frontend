@@ -12,10 +12,15 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="flex align-center h-7">
+  <div class="flex align-center h-7 mb-8">
     <el-page-header :icon="ArrowLeft" @back="router.back()">
       <template #content>
-        <span class="text-large font-600 mr-3">{{ props.title }}</span>
+        <div class="flex items-center">
+          <div class="flex mr-3">
+            <slot name="pre"  />
+          </div>
+          <span class="text-large font-600 mr-3">{{ props.title }}</span>
+        </div>
       </template>
     </el-page-header>
   </div>
