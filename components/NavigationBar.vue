@@ -32,7 +32,7 @@ function navigateToSearch() {
     </template>
     <div style="display: flex; align-items: center;padding: 0 1rem;">
       <div>
-        <el-input style="max-width: px;" v-model="query" placeholder="Search">
+        <el-input style="max-width: px;" v-model="query" placeholder="Search" @keydown.enter="navigateToSearch">
           <template #append>
             <el-button @click="navigateToSearch" :style="{
               borderBottomLeftRadius: '0',
