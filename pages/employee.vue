@@ -44,6 +44,9 @@ async function updateProduct(product) {
   <div class="content px-4">
     <div>
       <ClientOnly>
+        <p class="ml-2.5 mt-3 text-[#808080]">
+          Choose a category to see the products that you want to change the price or stock of.
+        </p>
         <el-select v-model="value" @change="productResponse()" class="m-2" placeholder="Select Category" size="large">
           <el-option v-for="item in data.items" :key="item.id" :label="item.name" :value="item.slug" />
         </el-select>
@@ -55,7 +58,6 @@ async function updateProduct(product) {
           <br>
           Choose a category to start :)
         </b>
-        
       </div>
 
       <div>

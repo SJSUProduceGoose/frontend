@@ -28,7 +28,7 @@ function navigateToSearch() {
     <template v-else>
       <el-menu-item index="/account">Account</el-menu-item>
       <el-menu-item index="/orders">Orders</el-menu-item>
-      <el-menu-item v-if="userStore.user.is_employee || userStore.user.is_superuser" index="/employee">Employee</el-menu-item>
+      <el-menu-item v-if="userStore.user.is_employee || userStore.user.is_superuser" index="/employee">Employee/Stock</el-menu-item>
     </template>
     <div style="display: flex; align-items: center;padding: 0 1rem;">
       <div>
