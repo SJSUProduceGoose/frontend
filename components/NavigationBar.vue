@@ -24,6 +24,7 @@ function navigateToSearch() {
     <el-menu-item index="/shop">Shop</el-menu-item>
     <template v-if="userStore.user === null">
       <el-menu-item index="/login">Login</el-menu-item>
+      <el-menu-item index="/register">Register</el-menu-item>
     </template>
     <template v-else>
       <el-menu-item index="/account">Account</el-menu-item>
