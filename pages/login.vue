@@ -14,7 +14,6 @@ const userStore = useUserStore()
 const router = useRouter()
 
 async function onSubmit(e) {
-  console.log(e);
   e.preventDefault();
 
   const formData = new FormData()
@@ -23,7 +22,8 @@ async function onSubmit(e) {
   formData.append('password', form.password)
 
   try {
-    const response = await $api('/auth/token/', {
+    const response = await $api('/bridge/login', {
+      baseURL: '/',
       method: 'POST',
       body: formData
     })

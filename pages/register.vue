@@ -26,21 +26,21 @@ async function onSubmit(e: Event) {
       return false;
     }
 
-    const formData = new FormData()
-
-    // TODO: json or form data?
-    formData.append('firstname', form.firstname)
-    formData.append('lastname', form.lastname)
-    formData.append('username', form.username)
-    formData.append('password', form.password)
-
     try {
       // TODO: verify the endpoint url
-      const response: any = await $api('/auth/register/', {
+      const response: any = await $api('/bridge/register', {
+        baseURL: '/',
         method: 'POST',
-        body: formData
+        body: {
+          firstname: form.firstname,
+          lastname: form.lastname,
+          username: form.username,
+          password: form.password,
+        }
       })
+
       userStore.setWithUserToken(response.access_token)
+      
       router.push('/shop')
     } catch (error: any) {
       showError.value = true
@@ -72,8 +72,8 @@ const validatePass2 = (rule: any, value: any, callback: any) => {
 }
 
 const rules = reactive({
-  firstname: [{required: true}],
-  lastname: [{ required: true }],
+  firstname: [{ required: true, message: 'A first name is required' }],
+  lastname: [{ required: true, message: 'A last name is required' }],
   username: [
     {
       required: true,
@@ -108,7 +108,7 @@ const rules = reactive({
       :model="form"
       status-icon
       :rules="rules"
-      label-width="90px"
+      label-width="140px"
     >
       <h3 class="mb-4">Register</h3>
       <el-form-item label="First name" prop="firstname">

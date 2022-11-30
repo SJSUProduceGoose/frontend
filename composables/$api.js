@@ -6,7 +6,7 @@ export const $api = async (path, options) => {
   const headers = useRequestHeaders(['cookie'])
 
   try {
-    return await $fetch(`${config.public.BASE_URL}${path}`, {
+    return await $fetch(path, {
       baseURL: config.BASE_URL || config.public.BASE_URL,
       headers: {
         ...headers,

@@ -1,12 +1,14 @@
 import { defineStore } from 'pinia'
 
 export const useUserStore = defineStore('user', () => {
-    const user = ref(null)
+    const sessionCookie = useCookie('session')
+    
+    // used to store the user data loaded from the ssr context
+    // contained within an httpOnly cookie
+    const user = useState('userStore:user', () => null)
     const loginNofification = ref(null)
 
-    const nuxt = useNuxtApp()
-
-    const base64decode = (str) => nuxt.ssrContext ? Buffer.from(str, 'base64').toString('utf-8') : atob(str)
+    const base64decode = (str) => process.server ? Buffer.from(str, 'base64').toString('utf-8') : atob(str)
 
     const setWithUserToken = (token) => {
         const sessionInfo = JSON.parse(base64decode(token.split('.')[1]));
@@ -19,13 +21,13 @@ export const useUserStore = defineStore('user', () => {
             user.value = null;
         }
     }
-    
-    const sessionCookie = useCookie('session')
-    
-    if (sessionCookie.value !== undefined && sessionCookie.value !== '') {
-        setWithUserToken(sessionCookie.value)
-    } else {
-        user.value = null
+
+    if (process.server) {
+        if (sessionCookie.value !== undefined && sessionCookie.value !== '') {
+            setWithUserToken(sessionCookie.value)
+        } else {
+            user.value = null
+        }
     }
 
     const setupLoginNotification = (message) => {
