@@ -8,7 +8,16 @@ const { data }= await useApi('/category/')
 
 <template>
   <div class="content px-4">
-    <PageHeader title="Categories"/>
+    <PageHeader title="Categories" :breadcrumbs="[
+        {
+          title: 'Landing',
+          to: '/',
+        },
+        {
+          title: 'Shop',
+          to: '/shop',
+        }
+      ]"/>
     <CardGrid :objects="data.items">
       <template v-slot="{ object }">
         <div class="flex justify-between items-center">

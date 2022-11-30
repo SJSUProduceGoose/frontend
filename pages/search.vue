@@ -25,6 +25,20 @@ const isEmpty = computed(() => {
 
 <template>
   <div class="content px-4">
+    <PageHeader :title="`Search: ${route.query.q}`" :breadcrumbs="[
+      {
+        title: 'Landing',
+        to: '/'
+      },
+      {
+        title: 'Shop',
+        to: '/shop'
+      },
+      {
+        title: `Search`,
+        to: route.fullPath
+      }
+    ]"  />
     <div v-if="isEmpty" class="flex">
       <img id="goose" src="~/assets/img/produce-goose.png" alt="Produce Goose" class="w-150 h-150 mt-25 ml-70">
         <b class="mt-85 font-sans text-pg-primary text-2xl"> No search results found! </b>
