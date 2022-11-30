@@ -11,6 +11,10 @@ const userStore = useUserStore()
 
 const query = ref(route.query.q || ''); 
 
+watch(() => { 
+  query.value = route.query.q || ''
+})
+
 function navigateToSearch() {
   navigateTo({ path: '/search', query: { q: query.value } })
 }
