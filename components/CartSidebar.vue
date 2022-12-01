@@ -80,7 +80,7 @@ async function onCheckout() {
                 title="Free Shipping"
                 :width="200"
                 trigger="hover"
-                :content="`Avalible for orders over ${FREE_SHIPPING_THRESHOLD} pounds`"
+                :content="`Avalible for orders under ${FREE_SHIPPING_THRESHOLD} pounds`"
               >
                 <template #reference>
                   <el-button v-if="!isFreeShipping" type="danger" size="small" class="float-left">Ineligible for Free Shipping ({{ cartStore.totalWeight.toFixed(2) }} lbs)</el-button>
