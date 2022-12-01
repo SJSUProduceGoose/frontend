@@ -1,12 +1,9 @@
 <script setup>
-import { ElPopover, ElProgress, ElButton, ElResult, ElInput, ElIcon, ElDrawer } from 'element-plus'
-import { Search, ShoppingCart } from '@element-plus/icons-vue'
+import { ElPopover, ElProgress, ElButton, ElDrawer } from 'element-plus'
 import { useUserStore } from "@/store/user";
-import { ref } from 'vue'
 import { useCartStore } from '@/store/cart'
 
 const cartStore = useCartStore();
-
 const userStore = useUserStore()
 
 const formattedPrice = computed(() => {
@@ -69,17 +66,17 @@ async function onCheckout() {
           </GooseResult>
         </template>
         <div v-else class="w-full h-full flex items-center justify-center">
-          <el-result
-            icon="warning"
+          <GooseResult
+            type="empty"
             title="Hold up!"
-            sub-title="You need to be logged in the cart cart feature."
+            sub-title="You must be logged to use the cart feature."
           >
             <template #extra>
               <el-button type="primary" @click="goTo('/login')">Login</el-button>
               <div class="my-3 text-sm" style="color: var(--el-text-color-regular);">or</div>
               <el-button type="default" @click="goTo('/register')">Register</el-button>
             </template>
-          </el-result>
+          </GooseResult>
         </div>
         <template #footer>
           <div class="flex flex-col w-full p-3">
@@ -87,12 +84,12 @@ async function onCheckout() {
               <el-popover
                 placement="top"
                 title="Free Shipping"
-                :width="200"
+                :width="300"
                 trigger="hover"
                 :content="`Available for orders under ${FREE_SHIPPING_THRESHOLD} pounds`"
               >
                 <template #reference>
-                  <el-button v-if="!isFreeShipping" type="danger" size="small" class="float-left">Ineligible for Free Shipping ({{ cartStore.totalWeight.toFixed(2) }} lbs)</el-button>
+                  <el-button v-if="!isFreeShipping" type="danger" size="small" class="w-full">Ineligible for Free Shipping ({{ cartStore.totalWeight.toFixed(2) }} lbs)</el-button>
                   <el-progress v-else :percentage="percentageTillFreeShipping" :status="percentageStatus" >
                     <el-button text>{{ cartStore.totalWeight.toFixed(2) }} / {{ FREE_SHIPPING_THRESHOLD }} lbs</el-button>
                   </el-progress>
@@ -120,12 +117,10 @@ async function onCheckout() {
   .el-drawer__header {
     margin-bottom: 0px;
     border-bottom: solid 1px var(--el-menu-border-color);
-    /* @apply shadow-lg; */
   }
 
   .el-drawer__footer {
     border-top: solid 1px var(--el-menu-border-color);
-    /* @apply shadow-lg; */
   }
 
   .el-drawer__header, .el-drawer__footer {

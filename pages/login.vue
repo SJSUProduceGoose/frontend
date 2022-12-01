@@ -1,5 +1,5 @@
 <script setup>
-import { ElButton, ElInput, ElForm, ElFormItem, ElLink, ElAlert, ElNotification } from 'element-plus'
+import { ElButton, ElInput, ElForm, ElFormItem, ElLink, ElAlert } from 'element-plus'
 import { useUserStore } from "@/store/user";
 
 const showError = ref(false)
