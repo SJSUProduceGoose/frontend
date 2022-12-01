@@ -34,6 +34,10 @@ const isFreeShipping = computed(() => {
   return cartStore.totalWeight < FREE_SHIPPING_THRESHOLD
 })
 
+function goTo(path) {
+  navigateTo(path)
+  cartStore.visible = false
+}
 async function onCheckout() {
   const response = await $api('/cart/checkout/', {
     method: 'POST',
@@ -71,9 +75,9 @@ async function onCheckout() {
             sub-title="You need to be logged in the cart cart feature."
           >
             <template #extra>
-              <el-button type="primary" @click="navigateTo('/login')">Login</el-button>
+              <el-button type="primary" @click="goTo('/login')">Login</el-button>
               <div class="my-3 text-sm" style="color: var(--el-text-color-regular);">or</div>
-              <el-button type="default" @click="navigateTo('/register')">Register</el-button>
+              <el-button type="default" @click="goTo('/register')">Register</el-button>
             </template>
           </el-result>
         </div>
