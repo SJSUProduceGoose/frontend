@@ -34,7 +34,7 @@ const { data } = await useApi(`/category/${route.params.slug}?expand=products`, 
             <div class="text-2xl">
               {{ object.name }}
             </div>
-            <div>${{ object.price }}</div>
+            <div>${{ object.price.toFixed(2) }} ({{ object.weight.toFixed(2) }} lbs)</div>
             <div class="flex mt-1.5">
             </div>
             <div class="flex mt-2">
