@@ -1,4 +1,6 @@
 import { defineStore } from 'pinia'
+import { ElNotification } from 'element-plus'
+import { Lock as LockIcon } from '@element-plus/icons-vue'
 
 export const useUserStore = defineStore('user', () => {
     const sessionCookie = useCookie('session')
@@ -40,5 +42,19 @@ export const useUserStore = defineStore('user', () => {
         isLoggedIn: computed(() => user.value !== null),
         setWithUserToken,
         setupLoginNotification,
+        logout: async () => {
+            await $api('/logout', {
+                baseURL: '/bridge'
+            })
+            user.value = null;
+            navigateTo('/');
+            ElNotification({
+                title: 'Success!',
+                message: 'You have been logged out.',
+                icon: LockIcon,
+                type: 'success',
+                duration: 5000
+            })
+        }
     }
 })

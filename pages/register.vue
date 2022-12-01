@@ -28,8 +28,8 @@ async function onSubmit(e: Event) {
 
     try {
       // TODO: verify the endpoint url
-      const response: any = await $api('/bridge/register', {
-        baseURL: '/',
+      const response: any = await $api('/register', {
+        baseURL: '/bridge',
         method: 'POST',
         body: {
           firstname: form.firstname,
