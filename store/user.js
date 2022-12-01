@@ -8,10 +8,9 @@ export const useUserStore = defineStore('user', () => {
     const user = useState('userStore:user', () => null)
     const loginNofification = ref(null)
 
-    const refreshing = ref(false)
+    // const refreshing = ref(false)
     const refreshAll = async () => {
         // TODO: implement refreshAll in favor of reload
-        // console.log('refreshAll');
         // refreshing.value = true
         // try {
         //     // await refreshNuxtData(['user:me', 'order:all'])

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ElButton, ElInput, ElForm, ElFormItem, ElLink, ElAlert, FormInstance } from 'element-plus'
+import { ElNotification, ElButton, ElInput, ElForm, ElFormItem, ElLink, ElAlert, FormInstance } from 'element-plus'
 import { useUserStore } from "@/store/user";
 
 const showError = ref<boolean>(false)
@@ -23,6 +23,12 @@ async function onSubmit(e: Event) {
   
   formRef.value?.validate(async (valid: boolean) => {
     if (!valid) {
+      ElNotification({
+        title: 'Error',
+        message: 'Please correct the issues in the marked fields.',
+        type: 'error',
+        duration: 5000,
+      })
       return false;
     }
 

@@ -39,9 +39,8 @@ const isEmpty = computed(() => {
         to: route.fullPath
       }
     ]"  />
-
     <div v-if="(error !== null)" class="flex">
-      <GooseResult title="Oops!" sub-title="There was an error completing your request. Please Try again." class="m-auto"/>
+      <GooseResult type="error" title="Oops!" sub-title="The Goose had to retreat because of a nasty error. Please Try again." class="m-auto"/>
     </div>
     <div v-else-if="isEmpty" class="flex">
       <GooseResult title="This is embarrising..." sub-title="The Goose could not find any results!" class="m-auto">
@@ -56,7 +55,7 @@ const isEmpty = computed(() => {
               <div class="text-2xl">
                 {{ object.name }}
               </div>
-              <div>${{ object.price }}</div>
+              <div>${{ object.price.toFixed(2) }} ({{ object.weight.toFixed(2) }} lbs)</div>
               <div class="flex mt-1.5">
               </div>
               <div class="flex mt-2">

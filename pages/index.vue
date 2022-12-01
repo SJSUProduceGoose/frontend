@@ -26,7 +26,7 @@ onMounted(() => {
 <template>
   <div class="content px-4">
     <div id="wrapper">
-      <img id="goose" src="~/assets/img/landing-page-logo.png" alt="The Goose"/>
+      <img id="goose" src="~/assets/img/success-goose.png" alt="The Goose"/>
 
       <div id="text">
         <img src="~/assets/img/title-logo.png" alt="Produce Goose" />

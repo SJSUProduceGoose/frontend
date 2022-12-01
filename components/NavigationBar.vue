@@ -16,7 +16,9 @@ watch(() => route.query, () => {
 })
 
 function navigateToSearch() {
-  navigateTo({ path: '/search', query: { q: query.value } })
+  if (query.value.length > 0) {
+    navigateTo(`/search/?q=${query.value}`)
+  }
 }
 </script>
 
