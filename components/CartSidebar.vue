@@ -91,9 +91,9 @@ async function onCheckout() {
               </el-popover>
             </div>
             <div>
-              <el-button type="primary" @click="onCheckout" class="mt-3 w-full">
-                Checkout
-              </el-button>
+            <el-button type="primary" @click="onCheckout" class="mt-3 w-full" :disabled="cartStore.itemCount == 0">
+              Checkout
+            </el-button>
             </div>
           </div>
         </template>
