@@ -68,7 +68,20 @@ onMounted(() => {
 </script>
 <template>
   <div class="content px-4">
-    <PageHeader :title="`Order #${order.id}`"/>
+    <PageHeader :title="`Order #${order.id}`" :breadcrumbs="[
+      {
+        title: 'Account',
+        to: '/account'
+      },
+      {
+        title: 'My Orders',
+        to: '/orders'
+      },
+      {
+        title: `Order #${order.id}`,
+        to: `/orders/${order.id}`
+      }
+    ]"  />
     <div class="m-auto max-w-200 flex flex-col">
       <div class="flex w-full flex-col mb-5 shadow-sm rounded border border-slate-300 overflow-hidden">
         <div class="bg-slate:50 pa-3">

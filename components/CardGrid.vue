@@ -8,7 +8,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <div class="card-grid pa-4">
+  <div class="card-grid">
     <el-card 
       v-for="object in props.objects" :key="object.id"
       class="ma-4"

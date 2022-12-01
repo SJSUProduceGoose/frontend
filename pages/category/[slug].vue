@@ -1,5 +1,5 @@
 <script setup>
-import { ElButton, ElInputNumber } from 'element-plus'
+import { ElButton } from 'element-plus'
 import { Plus } from '@element-plus/icons-vue'
 import { useCartStore } from '@/store/cart'
 
@@ -13,7 +13,20 @@ const { data } = await useApi(`/category/${route.params.slug}?expand=products`, 
 </script>
 <template>
   <div class="content px-4">
-    <PageHeader :title="data.name"/>
+    <PageHeader :title="data.name" :breadcrumbs="[
+        {
+          title: 'Landing',
+          to: '/',
+        },
+        {
+          title: 'Shop',
+          to: '/shop',
+        },
+        {
+          title: data.name,
+          to: route.fullPath,
+        }
+      ]"/>
     <CardGrid :objects="data.products">
       <template v-slot="{ object }">
         <div class="relative flex justify-between items-end">

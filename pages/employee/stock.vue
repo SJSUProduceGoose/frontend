@@ -1,13 +1,11 @@
 <script setup>
-import { ElSelect, ElOption, ElButton, ElIcon, ElInputNumber } from 'element-plus';
-import { Plus } from '@element-plus/icons-vue'
+import { ElSelect, ElOption, ElButton, ElInputNumber } from 'element-plus';
+
 import { ref } from 'vue'
 
 definePageMeta({
   middleware: ['auth-employee']
 })
-
-
 
 const value = ref('')
 
@@ -42,6 +40,16 @@ async function updateProduct(product) {
   
 <template>
   <div class="content px-4">
+    <PageHeader title="Stock" :breadcrumbs="[
+        {
+          title: 'Employee',
+          to: '',
+        },
+        {
+          title: 'Stock',
+          to: '/employee/stock',
+        }
+      ]"/>
     <div>
       <ClientOnly>
         <p class="ml-2.5 mt-3 text-[#808080]">

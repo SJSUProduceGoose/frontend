@@ -11,7 +11,8 @@ export default defineNuxtConfig({
   },
   serverHandlers: [
     { route: '/bridge/login', handler: '~/server/bridge/login.js' },
-    { route: '/bridge/register', handler: '~/server/bridge/register.js' }
+    { route: '/bridge/register', handler: '~/server/bridge/register.js' },
+    { route: '/bridge/logout', handler: '~/server/bridge/logout.js' }
   ],
 
   // meta

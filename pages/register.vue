@@ -28,8 +28,8 @@ async function onSubmit(e: Event) {
 
     try {
       // TODO: verify the endpoint url
-      const response: any = await $api('/bridge/register', {
-        baseURL: '/',
+      const response: any = await $api('/register', {
+        baseURL: '/bridge',
         method: 'POST',
         body: {
           firstname: form.firstname,
@@ -52,7 +52,7 @@ async function onSubmit(e: Event) {
 
 const validatePass = (rule: any, value: any, callback: any) => {
   if (value === '') {
-    callback(new Error('Please input the password'))
+    callback(new Error('Please input the password.'))
   } else {
     if (form.confirmPassword !== '') {
       if (!formRef.value) return
@@ -63,22 +63,22 @@ const validatePass = (rule: any, value: any, callback: any) => {
 }
 const validatePass2 = (rule: any, value: any, callback: any) => {
   if (value === '') {
-    callback(new Error('Please input the password again'))
+    callback(new Error('Please input the password again.'))
   } else if (value !== form.password) {
-    callback(new Error("The two passwords do no match!"))
+    callback(new Error("The two passwords do not match."))
   } else {
     callback()
   }
 }
 
 const rules = reactive({
-  firstname: [{ required: true, message: 'A first name is required' }],
-  lastname: [{ required: true, message: 'A last name is required' }],
+  firstname: [{ required: true, message: 'A first name is required.' }],
+  lastname: [{ required: true, message: 'A last name is required.' }],
   username: [
     {
       required: true,
       type: 'email',
-      message: 'Please input a valid email address',
+      message: 'Please input a valid email address.',
       trigger: 'blur'
     },
   ],
@@ -87,10 +87,10 @@ const rules = reactive({
       required: true, validator: validatePass, trigger: 'blur',
     },
     {
-      type: 'string', min: 8, message: 'Password must be at least 8 characters', trigger: 'blur',
+      type: 'string', min: 8, message: 'Password must be at least 8 characters.', trigger: 'blur',
     },
     {
-      type: 'string', max: 32, message: 'Password must be at most 32 characters', trigger: 'blur',
+      type: 'string', max: 32, message: 'Password must be at most 32 characters.', trigger: 'blur',
     },
   ],
   confirmPassword: [{ required: true, validator: validatePass2, trigger: 'blur' }],

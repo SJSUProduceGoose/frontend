@@ -22,8 +22,8 @@ async function onSubmit(e) {
   formData.append('password', form.password)
 
   try {
-    const response = await $api('/bridge/login', {
-      baseURL: '/',
+    const response = await $api('/login', {
+      baseURL: '/bridge',
       method: 'POST',
       body: formData
     })

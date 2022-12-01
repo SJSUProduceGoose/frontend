@@ -11,6 +11,10 @@ const userStore = useUserStore()
 
 const query = ref(route.query.q || ''); 
 
+watch(() => route.query, () => { 
+  query.value = route.query.q || ''
+})
+
 function navigateToSearch() {
   navigateTo({ path: '/search', query: { q: query.value } })
 }
@@ -24,6 +28,7 @@ function navigateToSearch() {
     <el-menu-item index="/shop">Shop</el-menu-item>
     <template v-if="userStore.user === null">
       <el-menu-item index="/login">Login</el-menu-item>
+      <el-menu-item index="/register">Register</el-menu-item>
     </template>
     <template v-else>
       <el-menu-item index="/account">Account</el-menu-item>
@@ -32,7 +37,7 @@ function navigateToSearch() {
     </template>
     <div style="display: flex; align-items: center;padding: 0 1rem;">
       <div>
-        <el-input style="max-width: px;" v-model="query" placeholder="Search">
+        <el-input style="max-width: px;" v-model="query" placeholder="Search" @keydown.enter="navigateToSearch">
           <template #append>
             <el-button @click="navigateToSearch" :style="{
               borderBottomLeftRadius: '0',
