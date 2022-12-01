@@ -1,5 +1,5 @@
 <script setup>
-import { ElButton } from 'element-plus'
+import { ElButton, ElResult, ElImage } from 'element-plus'
 import { Plus } from '@element-plus/icons-vue'
 import { useCartStore } from '@/store/cart'
 
@@ -40,8 +40,9 @@ const isEmpty = computed(() => {
       }
     ]"  />
     <div v-if="isEmpty" class="flex">
-      <img id="goose" src="~/assets/img/produce-goose.png" alt="Produce Goose" class="w-150 h-150 mt-25 ml-70">
-        <b class="mt-85 font-sans text-pg-primary text-2xl"> No search results found! </b>
+      <GooseResult title="This is embarrising..." sub-title="The Goose could not find any results!" class="m-auto">
+        <el-button type="default" @click="navigateTo('/shop')">Back</el-button>
+      </GooseResult>
     </div>
     <div v-else>
       <CardGrid :objects="items">
