@@ -1,5 +1,5 @@
 <script setup>
-import { ElNotification, ElResult, ElButton, ElTimeline, ElTimelineItem, ElSkeleton, ElSkeletonItem } from 'element-plus'
+import { ElPopover, ElNotification, ElResult, ElButton, ElTimeline, ElTimelineItem, ElSkeleton, ElSkeletonItem } from 'element-plus'
 
 import "leaflet/dist/leaflet.css"
 import { LMap, LMarker, LTileLayer } from "@vue-leaflet/vue-leaflet";
@@ -83,9 +83,9 @@ onMounted(() => {
       }
     ]"  />
     <div class="m-auto max-w-200 flex flex-col">
-      <div class="flex w-full flex-col mb-5 shadow-sm rounded border border-slate-300 overflow-hidden">
-        <div class="bg-slate:50 pa-3">
-          <div class="w-full">
+      <HeaderCard>
+        <template #header>
+          <div class="w-full pb-3">
             <table class="w-full">
               <thead>
                 <tr>
@@ -111,6 +111,8 @@ onMounted(() => {
               </tbody>
             </table>
           </div>
+        </template>
+        <template #subheader>
           <div class="w-full mt-6 flex items-center">
             <div class="w-40">
               <el-timeline>
@@ -156,15 +158,15 @@ onMounted(() => {
               </div>
             </div>
           </div>
-        </div>
-        <div class="flex w-full flex-row pa-3 bg-slate:10">
+        </template>
+        <template #body>
           <div class="mb-3 flex-1 mt-3">
             <div v-for="item in order.items" :key="item.id" class="flex flex-row">
-              <div class="flex justify-between w-full mb-3">
+              <div class="flex justify-between items-center w-full mb-3">
                 <div>
-                  <img rel="preload" :src="item.product.image_url" :alt="`${item.product.name} Image`" class="h-20 w-20 object-cover rounded-md shadow-md">
+                  <img rel="preload" :src="item.product.image_url" :alt="`${item.product.name} Image`" class="h-20 w-20 object-cover rounded-md shadow-md  mr-6">
                 </div>
-                <div class="w-100">
+                <div class="w-full items-center">
                   <table class="w-full">
                     <thead>
                       <tr>
@@ -185,16 +187,40 @@ onMounted(() => {
               </div>
             </div>
           </div>
-          <div class="flex flex-col ml-4 pt-3">
-            <div class="w-full mb-2">
-              <el-button class="w-full" disabled>Order Again</el-button>
-            </div>
-            <div class="w-full mb-2">
-              <el-button class="w-full" disabled>Write Review</el-button>
-            </div>
+          <div class=" flex-col ml-4 pt-3 sm:flex hidden">
+            <ClientOnly>
+              <el-popover
+                placement="left-start"
+                title="Hold on!"
+                :width="220"
+                trigger="hover"
+                content="This feature is coming soon!"
+              >
+                <template #reference>
+                  <div>
+                    <div class="w-full mb-2">
+                      <el-button class="w-full" disabled>Order Again</el-button>
+                    </div>
+                    <div class="w-full mb-2">
+                      <el-button class="w-full" disabled>Write Review</el-button>
+                    </div>
+                  </div>
+                </template>
+              </el-popover>
+              <template #fallback>
+                <div>
+                  <div class="w-full mb-2">
+                    <el-button class="w-full" disabled>Order Again</el-button>
+                  </div>
+                  <div class="w-full mb-2">
+                    <el-button class="w-full" disabled>Write Review</el-button>
+                  </div>
+                </div>
+              </template>
+            </ClientOnly>
           </div>
-        </div>
-      </div>
+        </template>
+      </HeaderCard>
     </div>
   </div>
 </template>

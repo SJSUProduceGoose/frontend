@@ -1,6 +1,8 @@
 <script setup>
-import { ElButton } from 'element-plus'
+import { ElIcon, ElButton } from 'element-plus'
 import { useCartStore } from '@/store/cart'
+
+import { ArrowRight } from '@element-plus/icons-vue'
 
 definePageMeta({
   middleware: ['auth-customer']
@@ -37,8 +39,8 @@ function goToDetails(id) {
         }
       ]"/>
     <div class="m-auto max-w-200 flex flex-col">
-      <div v-for="order in page.items" :key="order.id" class="flex w-full flex-col mb-5 shadow-sm rounded border border-slate-300 overflow-hidden">
-        <div class="bg-slate:50 pa-3">
+      <HeaderCard v-for="order in page.items" :key="order.id" class="flex w-full flex-col mb-5">
+        <template #header>
           <table class="w-full">
             <thead>
               <tr>
@@ -46,6 +48,7 @@ function goToDetails(id) {
                 <td class="color-gray-800 text-sm font-600">Total</td>
                 <td class="color-gray-800 text-sm font-600">Status</td>
                 <td class="color-gray-800 text-sm font-600">Items</td>
+                <td class="w-20"></td>
               </tr>
             </thead>
             <tbody>
@@ -54,18 +57,25 @@ function goToDetails(id) {
                 <td>${{ order.amount_total.toFixed(2) }}</td>
                 <td>{{ intToStatus[order.status] }}</td>
                 <td>{{ order.items.length }}</td>
+                <td>
+                  <div class="w-full mb-2">
+                    <el-button class="w-full" @click="goToDetails(order.id)">
+                      Details <el-icon class="el-icon--right"><ArrowRight /></el-icon>
+                    </el-button>
+                  </div>
+                </td>
               </tr>
             </tbody>
           </table>
-        </div>
-        <div class="flex w-full flex-row pa-3 bg-slate:10">
+        </template>
+        <template #body>
           <div class="mb-3 flex-1 mt-3">
             <div v-for="item in order.items" :key="item.id" class="flex flex-row">
-              <div class="flex justify-between w-full mb-3">
+              <div class="flex justify-between items-center w-full mb-3">
                 <div>
-                  <img rel="preload" :src="item.product.image_url" :alt="`${item.product.name} Image`" class="h-20 w-20 object-cover rounded-md shadow-md">
+                  <img rel="preload" :src="item.product.image_url" :alt="`${item.product.name} Image`" class="h-15 w-15 object-cover rounded-md shadow-md mr-6">
                 </div>
-                <div class="w-100">
+                <div class="w-full">
                   <table class="w-full">
                     <thead>
                       <tr>
@@ -86,19 +96,8 @@ function goToDetails(id) {
               </div>
             </div>
           </div>
-          <div class="flex flex-col ml-4 pt-3">
-            <div class="w-full mb-2">
-              <el-button class="w-full" @click="goToDetails(order.id)">Details</el-button>
-            </div>
-            <div class="w-full mb-2">
-              <el-button class="w-full" disabled>Order Again</el-button>
-            </div>
-            <div class="w-full mb-2">
-              <el-button class="w-full" disabled>Write Review</el-button>
-            </div>
-          </div>
-        </div>
-      </div>
+        </template>
+      </HeaderCard>
     </div>
   </div>
 </template>
