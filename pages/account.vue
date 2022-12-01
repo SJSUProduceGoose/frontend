@@ -1,5 +1,7 @@
 <script setup>
 import { ElPageHeader, ElDescriptionsItem, ElDescriptions, ElAvatar, ElTag } from 'element-plus'
+import { useUserStore } from "@/store/user";
+const userStore = useUserStore()
 
 definePageMeta({
   middleware: ['auth-customer']
@@ -25,7 +27,8 @@ const { data } = await useApi('/user/me/')
       <el-descriptions-item label="Email">{{ data.email }}</el-descriptions-item>
       <el-descriptions-item label="Area" :span="4">San Jose</el-descriptions-item>
       <el-descriptions-item label="Type">
-        <el-tag size="small">School</el-tag>
+        <el-tag v-if="userStore.user.is_employee || userStore.user.is_superuser" size="small">Employee</el-tag>
+        <el-tag v-else size="small">Customer</el-tag>
       </el-descriptions-item>
     </el-descriptions>
   </div>
