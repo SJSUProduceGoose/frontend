@@ -24,7 +24,7 @@ cartStore.fetchCart();
 
 <template>
   <div>
-    <NuxtLoadingIndicator color="#ff7800" height="3"/>
+    <NuxtLoadingIndicator color="#ff7800" :height="3"/>
     <ClientOnly>
       <el-dialog
         v-model="cartStore.displaySignupPrompt"

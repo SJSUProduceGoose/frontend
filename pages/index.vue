@@ -1,16 +1,37 @@
 <script setup>
-import { ElButton } from 'element-plus'
+import { ElButton, ElNotification } from 'element-plus'
+
+const router = useRouter()
+const route = useRoute()
+
+onMounted(() => {
+  if (route.query.logout === 'true') {
+    ElNotification({
+        title: 'Success!',
+        message: 'You have been logged out.',
+        type: 'success',
+        duration: 5000
+    })
+    router.replace({
+      query: {
+        ...route.query,
+        logout: undefined,
+      }
+    })
+  }
+})
 
 </script>
 
 <template>
   <div class="content px-4">
     <div id="wrapper">
-      <img id="goose" src="~/assets/img/produce-goose.png" alt="Produce Goose">
+      <img id="goose" src="~/assets/img/landing-page-logo.png" alt="The Goose"/>
 
       <div id="text">
-        <h1>Fresh! Local! Fun!</h1>
-        <h2>Order fresh produce from the comfort of your own home from local, organic farms with a few clicks!</h2>
+        <img src="~/assets/img/title-logo.png" alt="Produce Goose" />
+        <h1 class="text-pg-primary">Fresh! Local! Fun!</h1>
+        <h2 class="text-gray-800">Order fresh produce from the comfort of your own home from local, organic farms with a few clicks!</h2>
         <NuxtLink custom to="/shop" v-slot="{ navigate }">
           <el-button type="primary" class="action-button" @click="navigate">Shop Now</el-button>
         </NuxtLink>
@@ -34,11 +55,11 @@ import { ElButton } from 'element-plus'
 }
 
 #text {
-  color: #ff7800;
   width: 500px; 
 }
 
 h1 {
+  // color: #ff7800;
   font-size: 50px;
 }
 

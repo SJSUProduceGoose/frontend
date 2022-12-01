@@ -9,10 +9,12 @@ definePageMeta({
 
 const userStore = useUserStore()
 
-const { data } = await useApi('/user/me/')
+const { data, error } = await useApi('/user/me/', {
+  key: 'user:me'
+})
 
-
-const fullname = computed(() => `${data.value.firstname} ${data.value.lastname}`)
+const isError = computed(() => error.value !== null)
+const fullname = computed(() => !isError.value ? `${data.value.firstname} ${data.value.lastname}` : '')
 
 </script>
   
@@ -46,7 +48,7 @@ const fullname = computed(() => `${data.value.firstname} ${data.value.lastname}`
       </PageHeader>
     </div>
     <el-descriptions 
-    v-if="userStore.isLoggedIn"
+      v-if="!isError"
       title="Account Information"
       direction="vertical"
       :column="1"
@@ -58,8 +60,8 @@ const fullname = computed(() => `${data.value.firstname} ${data.value.lastname}`
       <el-descriptions-item label="Email">{{ data.email }}</el-descriptions-item>
       <el-descriptions-item label="Area" :span="4">San Jose</el-descriptions-item>
       <el-descriptions-item label="Role">
-        <el-tag v-if="userStore.user.is_superuser" size="small">Admin</el-tag>
-        <el-tag v-else-if="userStore.user.is_employee" size="small">Employee</el-tag>
+        <el-tag v-if="userStore.user?.is_superuser" size="small">Admin</el-tag>
+        <el-tag v-else-if="userStore.user?.is_employee" size="small">Employee</el-tag>
         <el-tag v-else size="small">Customer</el-tag>
       </el-descriptions-item>
     </el-descriptions>

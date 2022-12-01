@@ -1,5 +1,5 @@
 <script setup>
-import { ElButton } from 'element-plus'
+import { ElButton, ElResult, ElImage } from 'element-plus'
 import { Plus } from '@element-plus/icons-vue'
 import { useCartStore } from '@/store/cart'
 
@@ -12,14 +12,14 @@ definePageMeta({
 
 const items = ref([])
 
-const { data } = await useApi(`/search/?q=${route.query.q}`, {
+const { data, error } = await useApi(`/search/?q=${route.query.q}`, {
   key: `search:${route.query.q}`,
 })
 
-items.value = data.value.items
+items.value = data.value?.items
 
 const isEmpty = computed(() => {
-  return items.value.length == 0
+  return error.value !== null ? true : items.value?.length == 0
 })
 </script>
 
@@ -39,9 +39,14 @@ const isEmpty = computed(() => {
         to: route.fullPath
       }
     ]"  />
-    <div v-if="isEmpty" class="flex">
-      <img id="goose" src="~/assets/img/produce-goose.png" alt="Produce Goose" class="w-150 h-150 mt-25 ml-70">
-        <b class="mt-85 font-sans text-pg-primary text-2xl"> No search results found! </b>
+
+    <div v-if="(error !== null)" class="flex">
+      <GooseResult title="Oops!" sub-title="There was an error completing your request. Please Try again." class="m-auto"/>
+    </div>
+    <div v-else-if="isEmpty" class="flex">
+      <GooseResult title="This is embarrising..." sub-title="The Goose could not find any results!" class="m-auto">
+        <el-button type="default" @click="navigateTo('/shop')">Back</el-button>
+      </GooseResult>
     </div>
     <div v-else>
       <CardGrid :objects="items">

@@ -63,10 +63,13 @@ export const useCartStore = defineStore('cartStore', () => {
     }
     
     if (!userStore.isLoggedIn && firstItemAdded) {
-      pendingProduct = product;
-      displaySignupPrompt.value = true;
+      // TODO: remove anonymous cart logic
+      // displaySignupPrompt.value = true;
+      visible.value = true;
       return;
     }
+
+    visible.value = true;
 
     const existingItem = findByProduct(product);
 
@@ -80,11 +83,6 @@ export const useCartStore = defineStore('cartStore', () => {
           }
         })
         store.value.items.push(response)
-      } else {
-        store.value.items.push({
-          quantity: 1,
-          product
-        });
       }
     } else {
       update(existingItem, existingItem.quantity + 1);

@@ -27,7 +27,7 @@ async function onSubmit(e) {
       method: 'POST',
       body: formData
     })
-    userStore.setWithUserToken(response.access_token)
+    userStore.loginWithToken(response.access_token)
     router.push('/shop')
   } catch (error) {
     showError.value = true
