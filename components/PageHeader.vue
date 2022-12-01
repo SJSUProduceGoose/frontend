@@ -2,7 +2,7 @@
 import { ElPageHeader, ElBreadcrumb, ElBreadcrumbItem } from 'element-plus'
 import { ArrowLeft } from '@element-plus/icons-vue'
 
-const router = useRouter()
+
 const props = defineProps({
   title: {
     type: String,
@@ -23,11 +23,34 @@ const innerBreadcrumbs = computed(
   ]
 )
 
+
+const enoughToGBack = computed(() => innerBreadcrumbs.value.length > 1)
+const backTo = computed(() => enoughToGBack ? innerBreadcrumbs.value[innerBreadcrumbs.value.length - 2] : null)
+
+const canGoBack = computed(() => enoughToGBack.value && backTo.value !== null && backTo.value.to !== '')
+
+const pageHeaderTitle = computed(() => canGoBack.value ? 'Back' : '')
+const pageHeaderIcon = computed(() => canGoBack.value ? ArrowLeft : null)
+
+function goBack() {
+  if (canGoBack) {
+    const { to } = innerBreadcrumbs.value[innerBreadcrumbs.value.length - 2]
+    if (to) {
+      navigateTo(to)
+    }
+  }
+}
 </script>
 
 <template>
-  <div class="flex align-center h-7 mb-16">
-    <el-page-header :icon="ArrowLeft" @back="router.back()">
+  <div class="flex align-center h-7 mb-24 w-full page-header">
+    <el-page-header class="w-full" :icon="pageHeaderIcon" :title="pageHeaderTitle" @back="goBack">
+      <template #title>
+        {{ pageHeaderTitle }}
+      </template>
+      <template #default>
+
+      </template>
       <template #breadcrumb>
         <el-breadcrumb separator="/" class="mt-4">
           <el-breadcrumb-item 
@@ -46,6 +69,9 @@ const innerBreadcrumbs = computed(
           </div>
           <span class="text-large font-600 mr-3">{{ props.title }}</span>
         </div>
+      </template>
+      <template #extra>
+        <slot name="extra"  />
       </template>
     </el-page-header>
   </div>
