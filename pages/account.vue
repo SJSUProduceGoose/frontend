@@ -28,15 +28,19 @@ const fullname = computed(() => `${data.value.firstname} ${data.value.lastname}`
           <el-avatar size="small" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" />
         </template>
         <template #extra>
-          <el-popconfirm 
-            title="Are you sure?"
-            hide-icon
-            @confirm="userStore.logout">
-            <template #reference>
+          <ClientOnly>
+            <el-popconfirm 
+              title="Are you sure?"
+              hide-icon
+              @confirm="userStore.logout">
+              <template #reference>
+                <el-button type="danger">Log Out</el-button>
+              </template>
+            </el-popconfirm>
+            <template #fallback>
               <el-button type="danger">Log Out</el-button>
             </template>
-          </el-popconfirm>
-          
+          </ClientOnly>
         </template>
       </PageHeader>
     </div>
