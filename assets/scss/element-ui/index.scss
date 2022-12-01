@@ -4,5 +4,26 @@
     'primary': (
       'base': #FF7800,
     ),
-  )
+  ),
+  $border-color: (
+    '': #d3cec9,
+    'light': #bab5b0,
+    'lighter': #a19c98,
+    'extra-light': #dad6d0,
+    'dark': #7e7b77,
+    'darker': #585553,
+  ),
 );
+
+// @forward 'element-plus/theme-chalk/src/common/var.scss' with (
+//   $border-color: (
+//     'light': #d1d5dd,
+//     'lighter': #ebeef5,
+//     'extra-light': #f2f6fc,
+//     'dark': #d4d7de,
+//     'darker': #cdd0d6,
+//   )
+// );
+
+
+
