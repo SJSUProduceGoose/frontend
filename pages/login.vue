@@ -34,12 +34,6 @@ async function onSubmit(e) {
     errorText.value = error?.data?.detail || 'An error occurred while logging in.'
   }
 }
-
-if (process.client && userStore.loginNofification !== null) {
-  ElNotification(userStore.loginNofification)
-  userStore.loginNofification.value = null
-}
-
 </script>
 
 <template>

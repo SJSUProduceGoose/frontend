@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ElButton } from 'element-plus';
 
+
 const error = useError()
 
 const subTitle = computed(() => {
@@ -11,6 +12,10 @@ const subTitle = computed(() => {
       return "The Goose had to retreat because of a nasty error. Please Try again."
   }
 })
+
+function goHome() {
+  window.location.href = "/"
+}
 </script>
 
 <template>
@@ -21,7 +26,7 @@ const subTitle = computed(() => {
           :sub-title="subTitle"
           type="error"
         >
-        <el-button type="default" @click="navigateTo('/')">Retreat</el-button>
+        <el-button type="default" @click="goHome">Retreat</el-button>
       </GooseResult>
     </div>
   </div>

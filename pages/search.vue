@@ -43,7 +43,7 @@ const isEmpty = computed(() => {
       <GooseResult type="error" title="Oops!" sub-title="The Goose had to retreat because of a nasty error. Please Try again." class="m-auto"/>
     </div>
     <div v-else-if="isEmpty" class="flex">
-      <GooseResult title="This is embarrising..." sub-title="The Goose could not find any results!" class="m-auto">
+      <GooseResult title="This is embarrassing..." sub-title="The Goose could not find any results!" class="m-auto">
         <el-button type="default" @click="navigateTo('/shop')">Back</el-button>
       </GooseResult>
     </div>

@@ -14,13 +14,8 @@ const cartStore = useCartStore();
       <div class="p-3">
         <slot :item="item" :product="item.product"></slot>
       </div>
-
-
     </el-card>
-
-
   </div>
-
 </template>
 
 

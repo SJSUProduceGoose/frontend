@@ -64,7 +64,7 @@ async function onCheckout() {
               <CartItem :product="product" :item="item" />
             </template>
           </Cart>
-          <GooseResult v-else title="Hey there!" sub-title="Add some items to your to proceed with checkout!" class="m-auto">
+          <GooseResult v-else title="Hey there!" sub-title="Add some items to your cart to proceed with checkout!" class="m-auto">
             <el-button type="default" @click="cartStore.toggleVisibility">Close</el-button>
           </GooseResult>
         </template>
@@ -89,7 +89,7 @@ async function onCheckout() {
                 title="Free Shipping"
                 :width="200"
                 trigger="hover"
-                :content="`Avalible for orders under ${FREE_SHIPPING_THRESHOLD} pounds`"
+                :content="`Available for orders under ${FREE_SHIPPING_THRESHOLD} pounds`"
               >
                 <template #reference>
                   <el-button v-if="!isFreeShipping" type="danger" size="small" class="float-left">Ineligible for Free Shipping ({{ cartStore.totalWeight.toFixed(2) }} lbs)</el-button>

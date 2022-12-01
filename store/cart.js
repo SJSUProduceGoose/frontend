@@ -139,7 +139,6 @@ export const useCartStore = defineStore('cartStore', () => {
 
   return {
     add,
-    items: computed(() => store.value.items),
     update,
     remove,
     itemCount,
@@ -149,7 +148,8 @@ export const useCartStore = defineStore('cartStore', () => {
     displayOutOfStock,
     fetchCart,
     visible,
+    refresh,
+    items: computed(() => store.value.items),
     toggleVisibility: () => visible.value = !visible.value,
-    refresh
   }
 })
