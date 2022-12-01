@@ -54,11 +54,16 @@ async function onCheckout() {
             </div>
           </div>
         </template>
-        <Cart v-if="userStore.isLoggedIn" :objects="cartStore.items">
-          <template v-slot="{ product, item }">
-            <CartItem :product="product" :item="item" />
-          </template>
-        </Cart>
+        <template v-if="userStore.isLoggedIn">
+          <Cart v-if="(cartStore.itemCount > 0)" :objects="cartStore.items">
+            <template v-slot="{ product, item }">
+              <CartItem :product="product" :item="item" />
+            </template>
+          </Cart>
+          <GooseResult v-else title="Hey there!" sub-title="Add some items to your to proceed with checkout!" class="m-auto">
+            <el-button type="default" @click="cartStore.toggleVisibility">Close</el-button>
+          </GooseResult>
+        </template>
         <div v-else class="w-full h-full flex items-center justify-center">
           <el-result
             icon="warning"

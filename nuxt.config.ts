@@ -19,9 +19,9 @@ export default defineNuxtConfig({
   meta: {
     link: [
       // TODO: add favicon  
-      // {
-      //   rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'
-      // }
+      {
+        rel: 'icon', type: 'image/png', href: '/favicon.png'
+      },
       // ensure the the preflight is loaded before the main css
       { 
         rel: "prefetch stylesheet",

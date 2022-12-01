@@ -49,23 +49,22 @@ async function updateProduct(product) {
           title: 'Stock',
           to: '/employee/stock',
         }
-      ]"/>
-    <div>
-      <ClientOnly>
-        <p class="ml-2.5 mt-3 text-[#808080]">
-          Choose a category to see the products that you want to change the price or stock of.
-        </p>
-        <el-select v-model="value" @change="productResponse()" class="m-2" placeholder="Select Category" size="large">
-          <el-option v-for="item in data.items" :key="item.id" :label="item.name" :value="item.slug" />
-        </el-select>
+      ]">
+      <template #extra>
+        <ClientOnly>
+          <p class="text-gray-800 inline-block">
+            Category:
+          </p>
+          <el-select v-model="value" @change="productResponse()" class="m-2" placeholder="Select Category">
+            <el-option v-for="item in data.items" :key="item.id" :label="item.name" :value="item.slug" />
+          </el-select>
       </ClientOnly>
 
+      </template>
+    </PageHeader>
+    <div>
       <div v-if="show" class="flex">
-        <img id="goose" src="~/assets/img/produce-goose.png" alt="Produce Goose" class="w-150 h-150 mt-25 ml-90">
-        <b class="mt-65 font-sans text-pg-primary text-2xl">Welcome!
-          <br>
-          Choose a category to start :)
-        </b>
+        <GooseResult title="Howdy!" sub-title="Choose a category to see the products that you want to change the price or stock of." class="m-auto"/>
       </div>
 
       <div>
