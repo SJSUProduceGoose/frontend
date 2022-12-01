@@ -4,6 +4,13 @@
     'primary': (
       'base': #FF7800,
     ),
+    'warning': (
+      'base': #ffaf34,
+    ),
+    'danger': (
+      'base': #ff5353,
+    ),
+    
   ),
   $border-color: (
     '': #d3cec9,
@@ -14,16 +21,3 @@
     'darker': #585553,
   ),
 );
-
-// @forward 'element-plus/theme-chalk/src/common/var.scss' with (
-//   $border-color: (
-//     'light': #d1d5dd,
-//     'lighter': #ebeef5,
-//     'extra-light': #f2f6fc,
-//     'dark': #d4d7de,
-//     'darker': #cdd0d6,
-//   )
-// );
-
-
-
