@@ -6,8 +6,8 @@ const showError = ref(false)
 const errorText = ref('')
 
 const form = reactive({
-  username: 'jeff.bezos@sjsu.edu',
-  password: 'superuser',
+  username: '',
+  password: '',
 })
 
 const userStore = useUserStore()
