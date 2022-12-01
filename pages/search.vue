@@ -12,14 +12,14 @@ definePageMeta({
 
 const items = ref([])
 
-const { data } = await useApi(`/search/?q=${route.query.q}`, {
+const { data, error } = await useApi(`/search/?q=${route.query.q}`, {
   key: `search:${route.query.q}`,
 })
 
-items.value = data.value.items
+items.value = data.value?.items
 
 const isEmpty = computed(() => {
-  return items.value.length == 0
+  return error.value !== null ? true : items.value?.length == 0
 })
 </script>
 
@@ -39,7 +39,11 @@ const isEmpty = computed(() => {
         to: route.fullPath
       }
     ]"  />
-    <div v-if="isEmpty" class="flex">
+
+    <div v-if="(error !== null)" class="flex">
+      <GooseResult title="Oops!" sub-title="There was an error completing your request. Please Try again." class="m-auto"/>
+    </div>
+    <div v-else-if="isEmpty" class="flex">
       <GooseResult title="This is embarrising..." sub-title="The Goose could not find any results!" class="m-auto">
         <el-button type="default" @click="navigateTo('/shop')">Back</el-button>
       </GooseResult>

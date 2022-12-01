@@ -1,6 +1,4 @@
 import { defineStore } from 'pinia'
-import { ElNotification } from 'element-plus'
-import { Lock as LockIcon } from '@element-plus/icons-vue'
 
 export const useUserStore = defineStore('user', () => {
     const sessionCookie = useCookie('session')
@@ -10,7 +8,26 @@ export const useUserStore = defineStore('user', () => {
     const user = useState('userStore:user', () => null)
     const loginNofification = ref(null)
 
+    const refreshing = ref(false)
+    const refreshAll = async () => {
+        // TODO: implement refreshAll in favor of reload
+        // console.log('refreshAll');
+        // refreshing.value = true
+        // try {
+        //     // await refreshNuxtData(['user:me', 'order:all'])
+        //     await refreshNuxtData('user:me')
+        //     await refreshNuxtData('order:all')
+        // } finally {
+        //     refreshing.value = false
+        // }
+    }
+
     const base64decode = (str) => process.server ? Buffer.from(str, 'base64').toString('utf-8') : atob(str)
+    
+    const loginWithToken = (token) => {
+        setWithUserToken(token);
+        refreshAll();
+    }
 
     const setWithUserToken = (token) => {
         const sessionInfo = JSON.parse(base64decode(token.split('.')[1]));
@@ -42,19 +59,15 @@ export const useUserStore = defineStore('user', () => {
         isLoggedIn: computed(() => user.value !== null),
         setWithUserToken,
         setupLoginNotification,
+        loginWithToken,
         logout: async () => {
             await $api('/logout', {
                 baseURL: '/bridge'
             })
             user.value = null;
-            navigateTo('/');
-            ElNotification({
-                title: 'Success!',
-                message: 'You have been logged out.',
-                icon: LockIcon,
-                type: 'success',
-                duration: 5000
-            })
+            // refreshNuxtData('user:me')
+            refreshAll();
+            window.location.href = '/?logout=true';
         }
     }
 })

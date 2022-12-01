@@ -1,16 +1,10 @@
 <script setup>
 import { ElIcon, ElButton } from 'element-plus'
-import { useCartStore } from '@/store/cart'
-
 import { ArrowRight } from '@element-plus/icons-vue'
 
 definePageMeta({
   middleware: ['auth-customer']
 })
-
-
-const cartStore = useCartStore();
-
 
 const intToStatus = [
   'Cart',
@@ -19,11 +13,17 @@ const intToStatus = [
   'Delivered',
 ];
 
-const { data: page } = await useApi(`/order/`)
+const { data: page, error } = await useApi(`/order/`, {
+  key: 'order:all'
+})
 
 function goToDetails(id) {
   navigateTo(`/orders/${id}`)
 }
+
+const isEmpty = computed(() => {
+  return error.value !== null ? true : page.value.items.length == 0
+})
 
 </script>
 <template>
@@ -38,7 +38,15 @@ function goToDetails(id) {
           to: '/orders',
         }
       ]"/>
-    <div class="m-auto max-w-200 flex flex-col">
+    <div v-if="(error !== null)" class="flex">
+      <GooseResult title="Oops!" sub-title="There was an error completing your request. Please Try again." class="m-auto"/>
+    </div>
+    <div v-else-if="isEmpty" class="flex">
+      <GooseResult title="Nothing to see here..." sub-title="Place your first order and check back!" class="m-auto">
+        <el-button type="primary" @click="navigateTo('/shop')">Shop Now</el-button>
+      </GooseResult>
+    </div>
+    <div v-else class="m-auto max-w-200 flex flex-col">
       <HeaderCard v-for="order in page.items" :key="order.id" class="flex w-full flex-col mb-5">
         <template #header>
           <table class="w-full">

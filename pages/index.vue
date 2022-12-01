@@ -1,5 +1,25 @@
 <script setup>
-import { ElButton } from 'element-plus'
+import { ElButton, ElNotification } from 'element-plus'
+
+const router = useRouter()
+const route = useRoute()
+
+onMounted(() => {
+  if (route.query.logout === 'true') {
+    ElNotification({
+        title: 'Success!',
+        message: 'You have been logged out.',
+        type: 'success',
+        duration: 5000
+    })
+    router.replace({
+      query: {
+        ...route.query,
+        logout: undefined,
+      }
+    })
+  }
+})
 
 </script>
 

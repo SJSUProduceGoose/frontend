@@ -17,6 +17,10 @@ html, body {
   font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Arial,sans-serif;
 }
 
+.el-input-number {
+  line-height: normal!important;
+}
+
 .content {
   /* 60.5px is the height of the header */
   height: calc(100vh);

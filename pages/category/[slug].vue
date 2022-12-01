@@ -41,7 +41,6 @@ const { data } = await useApi(`/category/${route.params.slug}?expand=products`, 
             </div>
             </div>
             <div class="absolute bottom-0 right-0">
-
               <el-button circle @click="cartStore.add(object)" :icon="Plus" type="primary"></el-button>
             </div>
           </div>
