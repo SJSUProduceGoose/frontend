@@ -40,7 +40,8 @@ export const useUserStore = defineStore('user', () => {
         loginWithToken,
         logout: async () => {
             await $api('/logout', {
-                baseURL: '/bridge'
+                baseURL: '/bridge',
+                method: 'POST',
             })
             user.value = null;
             window.location.href = '/?logout=true';
