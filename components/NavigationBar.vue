@@ -11,7 +11,7 @@ const userStore = useUserStore()
 
 const query = ref(route.query.q || ''); 
 
-watch(() => { 
+watch(() => route.query, () => { 
   query.value = route.query.q || ''
 })
 
