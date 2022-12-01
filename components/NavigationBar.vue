@@ -21,7 +21,7 @@ function navigateToSearch() {
 </script>
 
 <template>
-  <el-menu class="navigation-menu" mode="horizontal" ellipsis router>
+  <el-menu :default-active="route.path" class="navigation-menu" mode="horizontal" ellipsis router>
       <div class="flex items-center justify-center px-3 cursor-pointer">
         <NuxtLink to ="/"><span class="whitespace-nowrap text-2xl font-bold text-pg-primary">OFS Farms</span></NuxtLink>
       </div>
@@ -35,7 +35,7 @@ function navigateToSearch() {
       <el-menu-item index="/orders">Orders</el-menu-item>
       <el-menu-item v-if="userStore.user.is_employee || userStore.user.is_superuser" index="/employee/stock">Stock</el-menu-item>
     </template>
-    <div style="display: flex; align-items: center;padding: 0 1rem;">
+    <div class="flex items-center px-4">
       <div>
         <el-input style="max-width: px;" v-model="query" placeholder="Search" @keydown.enter="navigateToSearch">
           <template #append>
