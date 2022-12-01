@@ -45,12 +45,13 @@ const fullname = computed(() => `${data.value.firstname} ${data.value.lastname}`
         </template>
       </PageHeader>
     </div>
-    <el-descriptions title="Account Information" direction="vertical" :column="1" size="large" border>
+    <el-descriptions v-if="userStore.isLoggedIn" title="Account Information" direction="vertical" :column="1" size="large" border>
       <el-descriptions-item label="Full Name">{{ fullname }}</el-descriptions-item>
       <el-descriptions-item label="Email">{{ data.email }}</el-descriptions-item>
       <el-descriptions-item label="Area" :span="4">San Jose</el-descriptions-item>
-      <el-descriptions-item label="Type">
-        <el-tag v-if="userStore.user.is_employee || userStore.user.is_superuser" size="small">Employee</el-tag>
+      <el-descriptions-item label="Role">
+        <el-tag v-if="userStore.user.is_superuser" size="small">Admin</el-tag>
+        <el-tag v-else-if="userStore.user.is_employee" size="small">Employee</el-tag>
         <el-tag v-else size="small">Customer</el-tag>
       </el-descriptions-item>
     </el-descriptions>
