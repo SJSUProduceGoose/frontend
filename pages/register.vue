@@ -26,21 +26,21 @@ async function onSubmit(e: Event) {
       return false;
     }
 
-    const formData = new FormData()
-
-    // TODO: json or form data?
-    formData.append('firstname', form.firstname)
-    formData.append('lastname', form.lastname)
-    formData.append('username', form.username)
-    formData.append('password', form.password)
-
     try {
       // TODO: verify the endpoint url
-      const response: any = await $api('/auth/register/', {
+      const response: any = await $api('/register', {
+        baseURL: '/bridge',
         method: 'POST',
-        body: formData
+        body: {
+          firstname: form.firstname,
+          lastname: form.lastname,
+          username: form.username,
+          password: form.password,
+        }
       })
+
       userStore.setWithUserToken(response.access_token)
+      
       router.push('/shop')
     } catch (error: any) {
       showError.value = true
@@ -52,7 +52,7 @@ async function onSubmit(e: Event) {
 
 const validatePass = (rule: any, value: any, callback: any) => {
   if (value === '') {
-    callback(new Error('Please input the password'))
+    callback(new Error('Please input the password.'))
   } else {
     if (form.confirmPassword !== '') {
       if (!formRef.value) return
@@ -63,22 +63,22 @@ const validatePass = (rule: any, value: any, callback: any) => {
 }
 const validatePass2 = (rule: any, value: any, callback: any) => {
   if (value === '') {
-    callback(new Error('Please input the password again'))
+    callback(new Error('Please input the password again.'))
   } else if (value !== form.password) {
-    callback(new Error("The two passwords do no match!"))
+    callback(new Error("The two passwords do not match."))
   } else {
     callback()
   }
 }
 
 const rules = reactive({
-  firstname: [{required: true}],
-  lastname: [{ required: true }],
+  firstname: [{ required: true, message: 'A first name is required.' }],
+  lastname: [{ required: true, message: 'A last name is required.' }],
   username: [
     {
       required: true,
       type: 'email',
-      message: 'Please input a valid email address',
+      message: 'Please input a valid email address.',
       trigger: 'blur'
     },
   ],
@@ -87,10 +87,10 @@ const rules = reactive({
       required: true, validator: validatePass, trigger: 'blur',
     },
     {
-      type: 'string', min: 8, message: 'Password must be at least 8 characters', trigger: 'blur',
+      type: 'string', min: 8, message: 'Password must be at least 8 characters.', trigger: 'blur',
     },
     {
-      type: 'string', max: 32, message: 'Password must be at most 32 characters', trigger: 'blur',
+      type: 'string', max: 32, message: 'Password must be at most 32 characters.', trigger: 'blur',
     },
   ],
   confirmPassword: [{ required: true, validator: validatePass2, trigger: 'blur' }],
@@ -108,7 +108,7 @@ const rules = reactive({
       :model="form"
       status-icon
       :rules="rules"
-      label-width="90px"
+      label-width="140px"
     >
       <h3 class="mb-4">Register</h3>
       <el-form-item label="First name" prop="firstname">
@@ -123,7 +123,7 @@ const rules = reactive({
       <el-form-item label="Password" prop="password">
         <el-input v-model="form.password" type="password" autocomplete="off" />
       </el-form-item>
-      <el-form-item label="Confirm" prop="confirmPassword">
+      <el-form-item label="Confirm Password" prop="confirmPassword">
         <el-input
           v-model="form.confirmPassword"
           type="password"

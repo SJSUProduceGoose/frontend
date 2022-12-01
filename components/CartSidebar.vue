@@ -1,5 +1,5 @@
 <script setup>
-import { ElPopover, ElProgress, ElButton, ElInput, ElIcon, ElDrawer } from 'element-plus'
+import { ElPopover, ElProgress, ElButton, ElResult, ElInput, ElIcon, ElDrawer } from 'element-plus'
 import { Search, ShoppingCart } from '@element-plus/icons-vue'
 import { useUserStore } from "@/store/user";
 import { ref } from 'vue'
@@ -20,8 +20,18 @@ const percentageTillFreeShipping = computed(() => {
   return percentage > 100 ? 100 : percentage
 })
 
+const percentageStatus = computed(() => {
+  if (percentageTillFreeShipping.value < 50) {
+    return 'success'
+  } else if (percentageTillFreeShipping.value < 90) {
+    return 'warning'
+  }
+
+  return 'exception'
+})
+
 const isFreeShipping = computed(() => {
-  return cartStore.totalWeight >= FREE_SHIPPING_THRESHOLD
+  return cartStore.totalWeight < FREE_SHIPPING_THRESHOLD
 })
 
 async function onCheckout() {
@@ -44,11 +54,24 @@ async function onCheckout() {
             </div>
           </div>
         </template>
-        <Cart :objects="cartStore.items">
+        <Cart v-if="userStore.isLoggedIn" :objects="cartStore.items">
           <template v-slot="{ product, item }">
             <CartItem :product="product" :item="item" />
           </template>
         </Cart>
+        <div v-else class="w-full h-full flex items-center justify-center">
+          <el-result
+            icon="warning"
+            title="Hold up!"
+            sub-title="You need to be logged in the cart cart feature."
+          >
+            <template #extra>
+              <el-button type="primary" @click="navigateTo('/login')">Login</el-button>
+              <div class="my-3 text-sm" style="color: var(--el-text-color-regular);">or</div>
+              <el-button type="default" @click="navigateTo('/register')">Register</el-button>
+            </template>
+          </el-result>
+        </div>
         <template #footer>
           <div class="flex flex-col w-full p-3">
             <div>
@@ -60,10 +83,10 @@ async function onCheckout() {
                 :content="`Avalible for orders over ${FREE_SHIPPING_THRESHOLD} pounds`"
               >
                 <template #reference>
-                  <el-progress v-if="!isFreeShipping" :percentage="percentageTillFreeShipping">
+                  <el-button v-if="!isFreeShipping" type="danger" size="small" class="float-left">Ineligible for Free Shipping ({{ cartStore.totalWeight.toFixed(2) }} lbs)</el-button>
+                  <el-progress v-else :percentage="percentageTillFreeShipping" :status="percentageStatus" >
                     <el-button text>{{ cartStore.totalWeight.toFixed(2) }} / {{ FREE_SHIPPING_THRESHOLD }} lbs</el-button>
                   </el-progress>
-                  <el-button v-else type="success" size="small">Free Shipping</el-button>
                 </template>
               </el-popover>
             </div>

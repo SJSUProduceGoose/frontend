@@ -3,6 +3,7 @@ import { ElNotification, ElResult, ElButton, ElTimeline, ElTimelineItem, ElSkele
 
 import "leaflet/dist/leaflet.css"
 import { LMap, LMarker, LTileLayer } from "@vue-leaflet/vue-leaflet";
+import { formatTimestamp } from '@/utils/formatters'
 
 const url = ref('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
 const attribution = ref('&copy; <a target="_blank" href="http://osm.org/copyright">OpenStreetMap</a> contributors');
@@ -22,17 +23,6 @@ const intToStatus = [
 const router = useRouter()
 const route = useRoute()
 
-if (route.query.stripe === 'success') {
-  if (process.client) {
-    ElNotification({
-      message: 'Payment Successful',
-      type: 'success',
-      duration: 5000
-    })
-    router.replace({ query: {} })
-  }
-}
-
 const { data: order } = await useApi(`/order/${route.params.id}/`)
 
 const center = computed(() => [order.value.latitude, order.value.longitude])
@@ -40,29 +30,58 @@ const markerLatLng = computed(() => [order.value.latitude, order.value.longitude
 
 const renderMap = computed(() => order.value.latitude && order.value.longitude)
 
-const activities = [
+const activities = ref([
   {
     content: 'Cart Created',
-    timestamp: new Date(`${order.value.created_at}Z`).toLocaleTimeString()
+    timestamp: '...',
   },
   {
     content: 'Order Placed',
-    timestamp: new Date(`${order.value.updated_at}Z`).toLocaleTimeString()
+    timestamp: '...',
   },
   {
     content: 'Out For Delivery',
-    timestamp: 'TBD',
+    timestamp: '...',
   },
   {
     content: 'Delivered',
-    timestamp: 'TBD',
+    timestamp: '...',
   },
-]
+])
+
+onMounted(() => {
+  if (route.query.stripe === 'success') {
+    ElNotification({
+      message: 'Payment Successful',
+      type: 'success',
+      duration: 5000
+    })
+    router.replace({ query: {} })
+  }
+
+  activities.value[0].timestamp = formatTimestamp(order.value.created_at)
+  activities.value[1].timestamp = formatTimestamp(order.value.updated_at)
+  activities.value[2].timestamp = 'TBD'
+  activities.value[3].timestamp = 'TBD'
+})
 
 </script>
 <template>
   <div class="content px-4">
-    <PageHeader :title="`Order #${order.id}`"/>
+    <PageHeader :title="`Order #${order.id}`" :breadcrumbs="[
+      {
+        title: 'Account',
+        to: '/account'
+      },
+      {
+        title: 'My Orders',
+        to: '/orders'
+      },
+      {
+        title: `Order #${order.id}`,
+        to: `/orders/${order.id}`
+      }
+    ]"  />
     <div class="m-auto max-w-200 flex flex-col">
       <div class="flex w-full flex-col mb-5 shadow-sm rounded border border-slate-300 overflow-hidden">
         <div class="bg-slate:50 pa-3">
@@ -97,9 +116,9 @@ const activities = [
               <el-timeline>
                 <el-timeline-item
                   v-for="(activity, index) in activities"
-                  :key="index"
-                  :timestamp="activity.timestamp"
-                >
+                    :key="activity.content"
+                    :timestamp="activity.timestamp"
+                  >
                   {{ activity.content }}
                 </el-timeline-item>
               </el-timeline>
@@ -119,7 +138,9 @@ const activities = [
                   />
                 </l-map>
                 <template #fallback>
-                  <el-skeleton style="width: 100%" loading animated/>
+                  <el-skeleton style="width: 100%" loading animated>
+                    <el-skeleton-item style="width: 100%; height: 100%" />
+                  </el-skeleton>
                 </template>
               </ClientOnly>
               <div v-else>

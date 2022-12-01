@@ -1,29 +1,52 @@
 <script setup>
-import { ElPageHeader, ElDescriptionsItem, ElDescriptions, ElAvatar, ElTag } from 'element-plus'
-import { useUserStore } from "@/store/user";
-const userStore = useUserStore()
+import { ElPopconfirm, ElDescriptionsItem, ElDescriptions, ElAvatar, ElTag, ElButton } from 'element-plus'
+import { useUserStore } from '@/store/user'
+
 
 definePageMeta({
   middleware: ['auth-customer']
 })
 
+const userStore = useUserStore()
+
 const { data } = await useApi('/user/me/')
+
+
+const fullname = computed(() => `${data.value.firstname} ${data.value.lastname}`)
 
 </script>
   
 <template>
   <div class="content px-4">
     <div class="flex">
-      <PageHeader class="mt-3"/>
-      <div class="flex items-center">
-        <el-avatar class="mt-4 ml--13 mr-2" :size="50" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" />
-        <span class="text-large font-600 mr-3 mt-4"> {{ data.firstname }} {{ data.lastname }}
-        </span>
-      </div>
+      <PageHeader :title="fullname" :breadcrumbs="[
+        {
+          title: 'Account',
+          to: '/account',
+        }
+      ]">
+        <template #pre>
+          <el-avatar size="small" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" />
+        </template>
+        <template #extra>
+          <ClientOnly>
+            <el-popconfirm 
+              title="Are you sure?"
+              hide-icon
+              @confirm="userStore.logout">
+              <template #reference>
+                <el-button type="danger">Log Out</el-button>
+              </template>
+            </el-popconfirm>
+            <template #fallback>
+              <el-button type="danger">Log Out</el-button>
+            </template>
+          </ClientOnly>
+        </template>
+      </PageHeader>
     </div>
     <el-descriptions title="Account Information" direction="vertical" :column="1" size="large" border>
-      <el-descriptions-item label="Full Name">{{ data.firstname }} {{ data.lastname }}
-      </el-descriptions-item>
+      <el-descriptions-item label="Full Name">{{ fullname }}</el-descriptions-item>
       <el-descriptions-item label="Email">{{ data.email }}</el-descriptions-item>
       <el-descriptions-item label="Area" :span="4">San Jose</el-descriptions-item>
       <el-descriptions-item label="Type">

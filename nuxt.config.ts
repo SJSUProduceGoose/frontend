@@ -9,6 +9,12 @@ export default defineNuxtConfig({
           BASE_URL: 'http://localhost:8080/api',
       },
   },
+  serverHandlers: [
+    { route: '/bridge/login', handler: '~/server/bridge/login.js' },
+    { route: '/bridge/register', handler: '~/server/bridge/register.js' },
+    { route: '/bridge/logout', handler: '~/server/bridge/logout.js' }
+  ],
+
   // meta
   meta: {
     link: [

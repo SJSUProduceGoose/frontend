@@ -26,7 +26,16 @@ function goToDetails(id) {
 </script>
 <template>
   <div class="content px-4">
-    <PageHeader title="My Orders"/>
+    <PageHeader title="My Orders" :breadcrumbs="[
+        {
+          title: 'Account',
+          to: '/account',
+        },
+        {
+          title: 'My Orders',
+          to: '/orders',
+        }
+      ]"/>
     <div class="m-auto max-w-200 flex flex-col">
       <div v-for="order in page.items" :key="order.id" class="flex w-full flex-col mb-5 shadow-sm rounded border border-slate-300 overflow-hidden">
         <div class="bg-slate:50 pa-3">

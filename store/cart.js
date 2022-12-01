@@ -13,7 +13,7 @@ export const useCartStore = defineStore('cartStore', () => {
     created_at: null,
     items: [],
   })
-  let fetchCartResponse;
+  let fetchCartResponse = null;
   const userStore = useUserStore()
   const displaySignupPrompt = ref(false);
   const displayOutOfStock = ref(false);
@@ -37,14 +37,22 @@ export const useCartStore = defineStore('cartStore', () => {
   const findByItem = ({ id }) => store.value.items.find((item ) => item.id === id);
   const findByProduct = ({ id }) => store.value.items.find(({ product } ) => product.id === id);
 
-  watch(() => userStore.user, async (newUser) => {
-    if (newUser !== null) {
+  watch(() => userStore.isLoggedIn, async (isLoggedIn) => {
+    if (isLoggedIn) {
       if (pendingProduct !== null) {
         add(pendingProduct)
         pendingProduct = null
       }
-      await fetchCartResponse.refresh();
+      await refresh();
       fetchCart();
+    } else {
+      store.value = {
+        id: -1,
+        status: 0,
+        updated_at: null,
+        created_at: null,
+        items: [],
+      }
     }
   });
 
@@ -115,9 +123,19 @@ export const useCartStore = defineStore('cartStore', () => {
   }
 
   const fetchCart = async () => {
+    if (!userStore.isLoggedIn) return;
+
     fetchCartResponse = await useApi('/cart/')
     if (fetchCartResponse.error.value == null) {
       store.value = fetchCartResponse.data.value
+    }
+  }
+
+  const refresh = async () => {
+    if (fetchCartResponse !== null) {
+      await fetchCartResponse.refresh()
+    } else {
+      fetchCart()
     }
   }
 
@@ -134,10 +152,6 @@ export const useCartStore = defineStore('cartStore', () => {
     fetchCart,
     visible,
     toggleVisibility: () => visible.value = !visible.value,
-    refresh: () => {
-      if (fetchCartResponse) {
-        fetchCartResponse.refresh()
-      }
-    },
+    refresh
   }
 })
