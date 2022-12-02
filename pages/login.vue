@@ -41,7 +41,7 @@ async function onSubmit(e) {
     <div class="auth-container">
       <el-form :model="form" label-width="90px" class="card auth-form-card">
         <h3 class="mb-4">Login</h3>
-        <el-form-item label="Username">
+        <el-form-item label="Email">
           <el-input v-model="form.username"/>
         </el-form-item>
         <el-form-item label="Password">
