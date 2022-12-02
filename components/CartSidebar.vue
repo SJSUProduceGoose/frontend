@@ -71,11 +71,9 @@ async function onCheckout() {
             title="Hold up!"
             sub-title="You must be logged to use the cart feature."
           >
-            <template #extra>
-              <el-button type="primary" @click="goTo('/login')">Login</el-button>
-              <div class="my-3 text-sm" style="color: var(--el-text-color-regular);">or</div>
-              <el-button type="default" @click="goTo('/register')">Register</el-button>
-            </template>
+            <el-button type="primary" @click="goTo('/login')">Login</el-button>
+            <div class="my-3 text-sm" style="color: var(--el-text-color-regular);">or</div>
+            <el-button type="default" @click="goTo('/register')">Register</el-button>
           </GooseResult>
         </div>
         <template #footer>
